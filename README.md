@@ -76,7 +76,7 @@
                     if (permission === 'granted') {
                         // Create and show the notification
                         var notification = new Notification('Subscribe to thepixelbest12', {
-                            body: 'Don\'t miss our latest content! Click here to subscribe.',
+                            body: 'Don\'t miss our latest content!',
                         });
                     }
                 });
