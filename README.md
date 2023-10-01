@@ -47,11 +47,9 @@
         }
         .online-users {
             background-color: #333; /* Dark Gray */
+            color: #FFF;
             padding: 20px;
             text-align: center;
-        }
-        .online-users p {
-            color: #FFF;
         }
     </style>
 </head>
@@ -88,7 +86,7 @@
 
         <!-- Online users count section -->
         <section class="online-users">
-            <p>Online users: <span id="onlineUsersCount">Loading...</span></p>
+            <p><span id="onlineUsersCount">Loading...</span> online users are currently visiting this site.</p>
         </section>
     </main>
 
@@ -149,3 +147,4 @@
     </script>
 </body>
 </html>
+
