@@ -49,7 +49,8 @@
 <body>
     <!-- Add the audio element for background music -->
     <audio autoplay loop>
-        <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
+        <!-- Update the src attribute with the correct file path -->
+        <source src="your-arabic-filename.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -97,5 +98,3 @@
     </script>
 </body>
 </html>
-
-
