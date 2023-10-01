@@ -78,7 +78,7 @@
             }
 
             // Open the YouTube link in a new tab with the "noopener" attribute
-            window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ', '_blank', 'noopener');
+            window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ');
         }
 
         // Call the updateCookiesCount function when the page loads to update the count
