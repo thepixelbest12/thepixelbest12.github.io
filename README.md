@@ -60,12 +60,7 @@
 
     <!-- Header section -->
     <header>
-        <h1>Welcome to thepixelbest12</h1>
-        <nav>
-            <ul>
-                <!-- You can add navigation links here if needed -->
-            </ul>
-        </nav>
+        <!-- You can add navigation links here if needed -->
     </header>
 
     <!-- Main content section -->
@@ -129,5 +124,4 @@
     </script>
 </body>
 </html>
-
 
