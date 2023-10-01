@@ -74,9 +74,9 @@
         </section>
     </main>
 
-    <!-- Visitor count section -->
+    <!-- Cookies count section -->
     <section>
-        <p><span id="visitorCount">0</span> visitors have seen this page.</p>
+        <p><span id="cookiesCount">0</span> visitors have seen this page.</p>
     </section>
 
     <script>
@@ -98,31 +98,30 @@
             window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ', '_blank');
         }
 
-        // Function to update the visitor count
-        function updateVisitorCount() {
-            // Check if the 'visitorCount' key is stored in localStorage
-            if (localStorage.getItem('visitorCount')) {
-                // Get the current visitor count from localStorage and convert it to a number
-                var count = parseInt(localStorage.getItem('visitorCount'));
+        // Function to update the cookies count
+        function updateCookiesCount() {
+            // Check if the 'cookies' cookie is set
+            if (document.cookie.includes('cookies=true')) {
+                // If the cookie exists, do nothing (don't update the count)
+            } else {
+                // If the cookie doesn't exist, update the count
+                // Get the current cookies count from the HTML
+                var countElement = document.getElementById('cookiesCount');
+                var count = parseInt(countElement.textContent);
                 // Increment the count by 1
                 count++;
                 // Update the HTML element to display the new count
-                document.getElementById('visitorCount').textContent = count;
-                // Store the updated count back in localStorage
-                localStorage.setItem('visitorCount', count);
-            } else {
-                // If 'visitorCount' doesn't exist in localStorage, create it with a count of 1
-                localStorage.setItem('visitorCount', 1);
-                // Display the initial count (1) in the HTML element
-                document.getElementById('visitorCount').textContent = 1;
+                countElement.textContent = count;
+                // Set a 'cookies' cookie to prevent further count updates for the same person
+                document.cookie = 'cookies=true; max-age=3600'; // The cookie will expire in 1 hour (3600 seconds)
             }
         }
 
-        // Call the updateVisitorCount function when the page loads to update the count
-        window.onload = updateVisitorCount;
+        // Call the updateCookiesCount function when the page loads to update the count
+        window.onload = updateCookiesCount;
 
         // Add a click event listener to the Subscribe button
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
     </script>
 </body>
-</html>
+</
