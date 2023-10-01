@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +36,7 @@
         }
         .hero p {
             font-size: 18px;
+            color: #000; /* Set text color to black */
         }
         .btn {
             background-color: #FF4500; /* Orange Red */
@@ -63,7 +63,7 @@
         <!-- Hero section -->
         <section class="hero">
             <h1>👇</h1>
-            <p>Please Subscribe, it will be highly appreciated</p>
+            <p>Please Subscribe, it will be <span style="color: black;">highly appreciated</span></p>
             <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" target="_blank" class="btn">Visit Channel</a>
         </section>
     </main>
