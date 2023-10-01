@@ -37,6 +37,7 @@
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
+            cursor: pointer; /* Add a pointer cursor */
         }
     </style>
 </head>
@@ -77,15 +78,13 @@
                 });
             }
 
-            // Open the YouTube link in a new tab with the "noopener" attribute
+            // Open the YouTube link in a new tab
             window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ');
         }
-
-        // Call the updateCookiesCount function when the page loads to update the count
-        window.onload = updateCookiesCount;
 
         // Add a click event listener to the Subscribe button
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
     </script>
 </body>
 </html>
+
