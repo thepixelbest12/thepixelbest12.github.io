@@ -19,10 +19,6 @@
             color: #FFF; /* White */
             font-family: Arial, sans-serif;
         }
-        header {
-            background-color: #333; /* Dark Gray */
-            padding: 20px;
-        }
         header a {
             color: #FFF;
             text-decoration: none;
