@@ -63,6 +63,12 @@
         </section>
     </main>
 
+    <!-- Your additional code here -->
+    <!-- Example code you provided -->
+    <section>
+        <p><span id="visitorsCount">0</span> people have visited this site.</p>
+    </section>
+
     <script>
         // Function to send a message and open the YouTube link
         function sendMessageAndOpenLink() {
@@ -87,4 +93,3 @@
     </script>
 </body>
 </html>
-
