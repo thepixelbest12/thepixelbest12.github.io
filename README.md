@@ -12,7 +12,10 @@
     <style>
         /* Custom CSS for thepixelbest12 brand */
         body {
-            background-color: #006400; /* Dark Green */
+            background-image: url('background.jpg'); /* Set your background image URL here */
+            background-size: cover; /* Cover the entire viewport */
+            background-repeat: no-repeat; /* Prevent image repetition */
+            background-attachment: fixed; /* Fixed background */
             color: #FFF; /* White */
             font-family: Arial, sans-serif;
         }
@@ -27,7 +30,7 @@
             font-weight: bold;
         }
         .hero {
-            background-color: #FFD700; /* Dark Yellow */
+            background-color: rgba(255, 215, 0, 0.7); /* Dark Yellow with transparency */
             padding: 60px 0;
             text-align: center;
         }
@@ -44,12 +47,6 @@
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-        }
-        .online-users {
-            background-color: #333; /* Dark Gray */
-            color: #FFF;
-            padding: 20px;
-            text-align: center;
         }
     </style>
 </head>
@@ -82,11 +79,6 @@
         <!-- Cookies count section -->
         <section>
             <p><span id="cookiesCount">0</span> visitors have seen this page.</p>
-        </section>
-
-        <!-- Online users count section -->
-        <section class="online-users">
-            <p><span id="onlineUsersCount">Loading...</span> online users are currently visiting this site.</p>
         </section>
     </main>
 
@@ -128,17 +120,6 @@
             }
         }
 
-        // Function to update the online users count using AJAX
-        function updateOnlineUsersCount() {
-            // Simulate the online users count with a random number (you can replace this with your real logic)
-            var onlineUsers = Math.floor(Math.random() * 100);
-            document.getElementById('onlineUsersCount').textContent = onlineUsers;
-        }
-
-        // Update the online users count when the page loads and every 5 seconds (you can adjust this interval)
-        updateOnlineUsersCount();
-        setInterval(updateOnlineUsersCount, 5000); // 5000 milliseconds = 5 seconds
-
         // Call the updateCookiesCount function when the page loads to update the count
         window.onload = updateCookiesCount;
 
@@ -147,3 +128,4 @@
     </script>
 </body>
 </html>
+
