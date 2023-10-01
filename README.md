@@ -11,7 +11,7 @@
     <style>
         /* Custom CSS for thepixelbest12 brand */
         body {
-            background-image: url('background.jpg'); /* Set your background image URL here */
+            background-image: url('Apple in universe.jpg'); /* Set your background image URL here */
             background-size: cover; /* Cover the entire viewport */
             background-repeat: no-repeat; /* Prevent image repetition */
             background-attachment: fixed; /* Fixed background */
