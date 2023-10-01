@@ -16,6 +16,7 @@
             background-size: cover; /* Cover the entire viewport */
             background-repeat: no-repeat; /* Prevent image repetition */
             background-attachment: fixed; /* Fixed background */
+            background-position: center center; /* Center the background image */
             color: #FFF; /* White */
             font-family: Arial, sans-serif;
         }
@@ -128,4 +129,5 @@
     </script>
 </body>
 </html>
+
 
