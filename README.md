@@ -1,16 +1,17 @@
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>thepixelbest12 - SUB</title>
+    <title>thepixelbest12 - Subscribe</title>
     <link rel="stylesheet" href="styles.css">
     
     <!-- Favicon with 32x32 pixel size -->
     <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
     
     <style>
-        /* Custom CSS for ThePixelBest12 brand */
+        /* Custom CSS for thepixelbest12 brand */
         body {
             background-color: #006400; /* Dark Green */
             color: #FFF; /* White */
@@ -23,7 +24,7 @@
         header a {
             color: #FFF;
             text-decoration: none;
-            margin right: 20px;
+            margin-right: 20px; /* Corrected margin property */
             font-weight: bold;
         }
         .hero {
@@ -68,3 +69,4 @@
     </main>
 </body>
 </html>
+
