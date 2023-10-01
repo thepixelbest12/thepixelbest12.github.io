@@ -47,11 +47,10 @@
     </style>
 </head>
 <body>
-    <!-- Add the audio element for background music -->
+    <!-- Add the audio element for background music with a description -->
     <audio autoplay loop>
-        <!-- Replace "your-audio-file.mp3" with your actual audio file path -->
         <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        Your browser does not support the audio element. Please enjoy the background music.
     </audio>
 
     <!-- Header section -->
@@ -94,8 +93,8 @@
                 });
             }
 
-            // Open the YouTube link in a new tab
-            window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ', '_blank');
+            // Open the YouTube link in a new tab with the "noopener" attribute
+            window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ', '_blank', 'noopener');
         }
 
         // Function to update the cookies count
@@ -124,3 +123,4 @@
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
     </script>
 </body>
+</html>
