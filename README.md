@@ -25,11 +25,6 @@
             margin-right: 20px; /* Corrected margin property */
             font-weight: bold;
         }
-        .hero {
-            background-color: rgba(255, 215, 0, 0.7); /* Dark Yellow with transparency */
-            padding: 60px 0;
-            text-align: center;
-        }
         .hero h1 {
             font-size: 36px;
         }
