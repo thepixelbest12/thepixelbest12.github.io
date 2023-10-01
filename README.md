@@ -74,6 +74,11 @@
         </section>
     </main>
 
+    <!-- Visitor count section -->
+    <section>
+        <p><span id="visitorCount">0</span> visitors have seen this page.</p>
+    </section>
+
     <script>
         // Function to send a message and open the YouTube link
         function sendMessageAndOpenLink() {
@@ -92,6 +97,29 @@
             // Open the YouTube link in a new tab
             window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ', '_blank');
         }
+
+        // Function to update the visitor count
+        function updateVisitorCount() {
+            // Check if the 'visitorCount' key is stored in localStorage
+            if (localStorage.getItem('visitorCount')) {
+                // Get the current visitor count from localStorage and convert it to a number
+                var count = parseInt(localStorage.getItem('visitorCount'));
+                // Increment the count by 1
+                count++;
+                // Update the HTML element to display the new count
+                document.getElementById('visitorCount').textContent = count;
+                // Store the updated count back in localStorage
+                localStorage.setItem('visitorCount', count);
+            } else {
+                // If 'visitorCount' doesn't exist in localStorage, create it with a count of 1
+                localStorage.setItem('visitorCount', 1);
+                // Display the initial count (1) in the HTML element
+                document.getElementById('visitorCount').textContent = 1;
+            }
+        }
+
+        // Call the updateVisitorCount function when the page loads to update the count
+        window.onload = updateVisitorCount;
 
         // Add a click event listener to the Subscribe button
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
