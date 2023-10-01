@@ -61,7 +61,7 @@
     <main>
         <!-- Hero section -->
         <section class="hero">
-            <h1>Welcome to thepixelbest12</h1>
+            <h1>👇</h1>
             <p>Please Subscribe, it will be highly appreciated</p>
             <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" target="_blank" class="btn">Visit Channel</a>
         </section>
