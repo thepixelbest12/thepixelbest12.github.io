@@ -1,4 +1,5 @@
-  <html lang="en">
+ <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,6 +48,12 @@
     </style>
 </head>
 <body>
+    <!-- Add the audio element for background music -->
+    <audio autoplay loop>
+        <source src="your-background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- Header section -->
     <header>
         <h1>Welcome to thepixelbest12</h1>
@@ -91,4 +98,5 @@
     </script>
 </body>
 </html>
+
 
