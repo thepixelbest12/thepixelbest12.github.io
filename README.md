@@ -124,4 +124,3 @@
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
     </script>
 </body>
-</
