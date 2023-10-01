@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -63,9 +64,31 @@
         <section class="hero">
             <h1>👇</h1>
             <p>Please Subscribe, it will be <span style="color: black;">highly appreciated</span></p>
+            <button id="subscribeButton" class="btn">Subscribe Now</button>
             <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" target="_blank" class="btn">Visit Channel</a>
         </section>
     </main>
+
+    <script>
+        // Function to request notification permission and send a subscription notification
+        function subscribeAndNotify() {
+            // Check if the browser supports notifications
+            if ('Notification' in window) {
+                Notification.requestPermission().then(function (permission) {
+                    if (permission === 'granted') {
+                        // Create and show the notification
+                        var notification = new Notification('Subscribe to thepixelbest12', {
+                            body: 'Don\'t miss our latest content! Click here to subscribe.',
+                        });
+                    }
+                });
+            }
+        }
+
+        // Add a click event listener to the Subscribe button
+        document.getElementById('subscribeButton').addEventListener('click', subscribeAndNotify);
+    </script>
 </body>
 </html>
+
 
