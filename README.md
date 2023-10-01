@@ -65,13 +65,12 @@
             <h1>👇</h1>
             <p>Please Subscribe, it will be <span style="color: black;">highly appreciated</span></p>
             <button id="subscribeButton" class="btn">Subscribe Now</button>
-            <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" target="_blank" class="btn">Visit Channel</a>
         </section>
     </main>
 
     <script>
-        // Function to request notification permission and send a subscription notification
-        function subscribeAndNotify() {
+        // Function to send a message and open the YouTube link
+        function sendMessageAndOpenLink() {
             // Check if the browser supports notifications
             if ('Notification' in window) {
                 Notification.requestPermission().then(function (permission) {
@@ -83,11 +82,17 @@
                     }
                 });
             }
+
+            // Open the YouTube link in a new tab
+            window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ', '_blank');
         }
 
         // Add a click event listener to the Subscribe button
-        document.getElementById('subscribeButton').addEventListener('click', subscribeAndNotify);
+        document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
     </script>
+</body>
+</html>
+
 </body>
 </html>
 
