@@ -23,7 +23,7 @@
             color: #FFF;
             text-decoration: none;
             margin-right: 20px; /* Corrected margin property */
-            font-weight: bold;
+            font-weight: bold.
         }
         .hero {
             background-color: #FFD700; /* Dark Yellow */
