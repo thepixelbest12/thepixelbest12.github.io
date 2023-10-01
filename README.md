@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +12,7 @@
     <style>
         /* Custom CSS for thepixelbest12 brand */
         body {
-            background-image: url('Apple in universe.jpg'); /* Set your background image URL here */
+            background-image: url('background.jpg'); /* Set your background image URL here */
             background-size: cover; /* Cover the entire viewport */
             background-repeat: no-repeat; /* Prevent image repetition */
             background-attachment: fixed; /* Fixed background */
@@ -39,7 +40,6 @@
         }
         .hero p {
             font-size: 18px;
-            color: #000; /* Set text color to black */
         }
         .btn {
             background-color: #FF4500; /* Orange Red */
@@ -67,13 +67,8 @@
         <!-- Hero section -->
         <section class="hero">
             <h1>👇</h1>
-            <p>Please Subscribe, it will be <span style="color: black;">highly appreciated</span></p>
+            <p>Please Subscribe</p>
             <button id="subscribeButton" class="btn">Subscribe Now</button>
-        </section>
-
-        <!-- Cookies count section -->
-        <section>
-            <p><span id="cookiesCount">0</span> visitors have seen this page.</p>
         </section>
     </main>
 
@@ -96,25 +91,6 @@
             window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ', '_blank', 'noopener');
         }
 
-        // Function to update the cookies count
-        function updateCookiesCount() {
-            // Check if the 'cookies' cookie is set
-            if (document.cookie.includes('cookies=true')) {
-                // If the cookie exists, do nothing (don't update the count)
-            } else {
-                // If the cookie doesn't exist, update the count
-                // Get the current cookies count from the HTML
-                var countElement = document.getElementById('cookiesCount');
-                var count = parseInt(countElement.textContent);
-                // Increment the count by 1
-                count++;
-                // Update the HTML element to display the new count
-                countElement.textContent = count;
-                // Set a 'cookies' cookie to prevent further count updates for the same person
-                document.cookie = 'cookies=true; max-age=3600'; // The cookie will expire in 1 hour (3600 seconds)
-            }
-        }
-
         // Call the updateCookiesCount function when the page loads to update the count
         window.onload = updateCookiesCount;
 
@@ -123,4 +99,3 @@
     </script>
 </body>
 </html>
-
