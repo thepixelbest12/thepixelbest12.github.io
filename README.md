@@ -23,7 +23,7 @@
             color: #FFF;
             text-decoration: none;
             margin-right: 20px; /* Corrected margin property */
-            font-weight: bold.
+            font-weight: bold;
         }
         .hero {
             background-color: #FFD700; /* Dark Yellow */
@@ -49,7 +49,7 @@
 <body>
     <!-- Add the audio element for background music -->
     <audio autoplay loop>
-        <!-- Update the src attribute with the correct file path -->
+        <!-- Replace "your-audio-file.mp3" with your actual audio file path -->
         <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
