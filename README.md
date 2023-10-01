@@ -71,12 +71,17 @@
             <p>Please Subscribe, it will be <span style="color: black;">highly appreciated</span></p>
             <button id="subscribeButton" class="btn">Subscribe Now</button>
         </section>
-    </main>
 
-    <!-- Cookies count section -->
-    <section>
-        <p><span id="cookiesCount">0</span> visitors have seen this page.</p>
-    </section>
+        <!-- Cookies count section -->
+        <section>
+            <p><span id="cookiesCount">0</span> visitors have seen this page.</p>
+        </section>
+
+        <!-- Add the online users count section -->
+        <section>
+            <p><span id="onlineUsersCount">Loading...</span> online users are currently visiting this site.</p>
+        </section>
+    </main>
 
     <script>
         // Function to send a message and open the YouTube link
@@ -115,6 +120,22 @@
                 document.cookie = 'cookies=true; max-age=3600'; // The cookie will expire in 1 hour (3600 seconds)
             }
         }
+
+        // Function to update the online users count using AJAX
+        function updateOnlineUsersCount() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById('onlineUsersCount').textContent = xhr.responseText;
+                }
+            };
+            xhr.open('GET', 'online_users.php', true);
+            xhr.send();
+        }
+
+        // Update the online users count when the page loads and every 5 seconds (you can adjust this interval)
+        updateOnlineUsersCount();
+        setInterval(updateOnlineUsersCount, 5000); // 5000 milliseconds = 5 seconds
 
         // Call the updateCookiesCount function when the page loads to update the count
         window.onload = updateCookiesCount;
