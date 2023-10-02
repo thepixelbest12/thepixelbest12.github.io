@@ -105,7 +105,7 @@
         }
 
         // Call the updateVisitorsCount function when the page loads to update the count
-        window.onload = updateVisitorsCount;
+        updateVisitorsCount();
 
         // Add a click event listener to the Subscribe button
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
