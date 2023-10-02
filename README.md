@@ -88,20 +88,16 @@
             window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ');
         }
 
+        // Initialize the visitor count variable
+        var visitorsCount = 0;
+
         // Function to update the visitors count
         function updateVisitorsCount() {
-            // Check if the count is stored in localStorage
-            if (localStorage.getItem('visitorsCount')) {
-                // If it is, retrieve and increment it
-                var count = parseInt(localStorage.getItem('visitorsCount')) + 1;
-                localStorage.setItem('visitorsCount', count);
-            } else {
-                // If not, set it to 1
-                localStorage.setItem('visitorsCount', 1);
-            }
+            // Increment the count
+            visitorsCount++;
 
             // Update the HTML element to display the count
-            document.getElementById('visitorsCount').textContent = localStorage.getItem('visitorsCount');
+            document.getElementById('visitorsCount').textContent = visitorsCount;
         }
 
         // Call the updateVisitorsCount function when the page loads to update the count
