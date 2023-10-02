@@ -58,9 +58,9 @@
         <!-- Hero section -->
         <section class="hero">
             <h1>👇</h1>
-            <p>Please Subscribe, it will be highly appriciated</p>
+            <p>Please Subscribe</p>
             <button id="subscribeButton" class="btn">Subscribe Now</button>
-            <!-- Button for mobile users to start audio -->
+            <!-- Button for mobile users to control audio playback -->
             <button id="pressButton" class="btn">Press</button>
         </section>
         <!-- Visitors count section -->
@@ -110,12 +110,18 @@
         // Add a click event listener to the Subscribe button
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
 
-        // Add a click event listener to the mobile button to start audio playback
-        document.getElementById('pressButton').addEventListener('click', function() {
-            var audio = document.getElementById('backgroundAudio');
-            audio.play();
+        // Add a click event listener to the mobile button to control audio playback
+        var audio = document.getElementById('backgroundAudio');
+        var pressButton = document.getElementById('pressButton');
+        pressButton.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+                pressButton.textContent = "Pause";
+            } else {
+                audio.pause();
+                pressButton.textContent = "Press";
+            }
         });
     </script>
 </body>
 </html>
-
