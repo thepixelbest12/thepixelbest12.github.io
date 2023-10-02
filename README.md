@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -43,7 +44,7 @@
 </head>
 <body>
     <!-- Add the audio element for background music with a description -->
-    <audio autoplay loop>
+    <audio id="backgroundAudio" loop>
         <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
         Your browser does not support the audio element. Please enjoy the background music.
     </audio>
@@ -58,16 +59,16 @@
         <!-- Hero section -->
         <section class="hero">
             <h1>👇</h1>
-            <p>Please Subscribe</p>
+            <p>Please Subscribe, it will be highly appriciated</p>
             <button id="subscribeButton" class="btn">Subscribe Now</button>
+            <!-- Button for mobile users to start audio -->
+            <button id="pressButton" class="btn">Press</button>
+        </section>
+        <!-- Visitors count section -->
+        <section>
+            <p><span id="visitorsCount">0</span> visitors have seen this page.</p>
         </section>
     </main>
-
-    <!-- Your additional code here -->
-    <!-- Example code you provided -->
-    <section>
-        <p><span id="visitorsCount">0</span> people have visited this site.</p>
-    </section>
 
     <script>
         // Function to send a message and open the YouTube link
@@ -88,8 +89,34 @@
             window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ');
         }
 
+        // Function to update the visitors count
+        function updateVisitorsCount() {
+            // Check if the count is stored in localStorage
+            if (localStorage.getItem('visitorsCount')) {
+                // If it is, retrieve and increment it
+                var count = parseInt(localStorage.getItem('visitorsCount')) + 1;
+                localStorage.setItem('visitorsCount', count);
+            } else {
+                // If not, set it to 1
+                localStorage.setItem('visitorsCount', 1);
+            }
+
+            // Update the HTML element to display the count
+            document.getElementById('visitorsCount').textContent = localStorage.getItem('visitorsCount');
+        }
+
+        // Call the updateVisitorsCount function when the page loads to update the count
+        window.onload = updateVisitorsCount;
+
         // Add a click event listener to the Subscribe button
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
+
+        // Add a click event listener to the mobile button to start audio playback
+        document.getElementById('pressButton').addEventListener('click', function() {
+            var audio = document.getElementById('backgroundAudio');
+            audio.play();
+        });
     </script>
 </body>
 </html>
+
