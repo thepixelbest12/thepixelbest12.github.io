@@ -44,7 +44,6 @@
         Your browser does not support the audio element. Please enjoy the background music.
     </audio>
     
-</header>
 
     <main>
         <section class="hero">
