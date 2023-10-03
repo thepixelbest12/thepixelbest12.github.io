@@ -43,10 +43,8 @@
         <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
         Your browser does not support the audio element. Please enjoy the background music.
     </audio>
-
-    <header>
-        <a href="https://thepixelbest12.github.io">Home Page</a>
-    </header>
+    
+</header>
 
     <main>
         <section class="hero">
