@@ -48,7 +48,7 @@
     <main>
         <section class="hero">
             <h1>👇</h1>
-            <p>Please Subscribe</p>
+            <p>Please Subscribe, It will be highly appreciated.                   Share this link with people you know.</p>
             <button id="subscribeButton" class="btn">Subscribe Now</button>
             <button id="pressButton" class="btn">Press</button>
         </section>
