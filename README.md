@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -80,29 +79,12 @@
             color: #FFF;
             line-height: 1.5;
         }
-        .contact-section {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 100px 0;
-            text-align: center;
-            border-radius: 20px;
-        }
-        .contact-section h2 {
-            font-size: 36px;
-            color: #FF4500;
-            margin-bottom: 20px;
-        }
-        .contact-section p {
-            font-size: 20px;
-            color: #FFF;
-            line-height: 1.5;
-        }
     </style>
 </head>
 <body>
     <header>
         <a href="#">Home</a>
         <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
     </header>
 
     <div class="hero">
@@ -114,11 +96,6 @@
     <section class="about-section" id="about">
         <h2>About Us</h2>
         <p>We are thepixelbest12, a team of passionate content creators dedicated to delivering top-quality content that entertains, educates, and inspires. From captivating videos to informative tutorials, our channel has it all. Subscribe now to become part of our growing community!</p>
-    </section>
-
-    <section class="contact-section" id="contact">
-        <h2>Contact Us</h2>
-        <p>Got questions, feedback, or collaboration ideas? We'd love to hear from you! Contact us at <a href="mailto:your@email.com">your@email.com</a>. Your input helps us create content you'll love.</p>
     </section>
 
     <script>
