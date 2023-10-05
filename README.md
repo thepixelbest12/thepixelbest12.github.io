@@ -84,7 +84,7 @@
 <body>
     <header>
         <a href="#">Home</a>
-        <a href="#about">About Us</a>
+        <a href="about.html">About Us</a> <!-- Updated link to point to about.html -->
     </header>
 
     <div class="hero">
