@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,44 +16,110 @@
             background-position: center center;
             color: #FFF;
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
         }
         header a {
-            color: #FFF;
+            color: #FF4500;
             text-decoration: none;
-            margin-right: 20px;
+            margin: 0 20px;
             font-weight: bold;
+            font-size: 18px;
+        }
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
         }
         .hero h1 {
-            font-size: 36px;
+            font-size: 48px;
+            margin-bottom: 20px;
         }
         .hero p {
-            font-size: 18px;
+            font-size: 24px;
+            margin-bottom: 40px;
         }
         .btn {
             background-color: #FF4500;
             color: #FFF;
-            padding: 10px 20px;
+            padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            background-color: #FF6600;
+            transform: scale(1.05); /* Add scale effect on hover */
+        }
+        .about-section {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 20px;
+        }
+        .about-section h2 {
+            font-size: 36px;
+            color: #FF4500;
+            margin-bottom: 20px;
+        }
+        .about-section p {
+            font-size: 20px;
+            color: #FFF;
+            line-height: 1.5;
+        }
+        .contact-section {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 20px;
+        }
+        .contact-section h2 {
+            font-size: 36px;
+            color: #FF4500;
+            margin-bottom: 20px;
+        }
+        .contact-section p {
+            font-size: 20px;
+            color: #FFF;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
-    <audio id="backgroundAudio" loop>
-        <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
-        Your browser does not support the audio element. Please enjoy the background music.
-    </audio>
-    
+    <header>
+        <a href="#">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+    </header>
 
-    <main>
-        <section class="hero">
-            <h1>👇</h1>
-            <p>Please Subscribe, It will be highly appreciated.                   Share this link with people you know.</p>
-            <button id="subscribeButton" class="btn">Subscribe Now</button>
-            <button id="pressButton" class="btn">Press</button>
-        </section>
-    </main>
+    <div class="hero">
+        <h1>👇 Welcome to Our Channel 👇</h1>
+        <p>Join our community and discover incredible content. Subscribe now for exciting updates!</p>
+        <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" class="btn">Subscribe Now</a>
+    </div>
+
+    <section class="about-section" id="about">
+        <h2>About Us</h2>
+        <p>We are thepixelbest12, a team of passionate content creators dedicated to delivering top-quality content that entertains, educates, and inspires. From captivating videos to informative tutorials, our channel has it all. Subscribe now to become part of our growing community!</p>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2>Contact Us</h2>
+        <p>Got questions, feedback, or collaboration ideas? We'd love to hear from you! Contact us at <a href="mailto:your@email.com">your@email.com</a>. Your input helps us create content you'll love.</p>
+    </section>
 
     <script>
         function sendMessageAndOpenLink() {
@@ -70,19 +137,6 @@
         }
 
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
-
-        var audio = document.getElementById('backgroundAudio');
-        var pressButton = document.getElementById('pressButton');
-        pressButton.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play();
-                pressButton.textContent = "Pause";
-            } else {
-                audio.pause();
-                pressButton.textContent = "Press";
-            }
-        });
     </script>
 </body>
 </html>
-
