@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -79,18 +80,28 @@
             color: #FFF;
             line-height: 1.5;
         }
+        /* Audio controls */
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 5px;
+            padding: 5px;
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
     <header>
-        <a href="#">Home</a>
-        <a href="about.html">About Us</a> <!-- Updated link to point to about.html -->
+        <a href="#" target="_blank">Home</a> <!-- Opens in a new tab -->
+        <a href="about.html" target="_blank">About Us</a> <!-- Opens in a new tab -->
     </header>
 
     <div class="hero">
         <h1>👇 Welcome to Our Channel 👇</h1>
         <p>Join our community and discover incredible content. Subscribe now for exciting updates!</p>
-        <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" class="btn">Subscribe Now</a>
+        <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" class="btn" target="_blank">Subscribe Now</a> <!-- Opens in a new tab -->
     </div>
 
     <section class="about-section" id="about">
@@ -98,20 +109,35 @@
         <p>We are thepixelbest12, a team of passionate content creators dedicated to delivering top-quality content that entertains, educates, and inspires. From captivating videos to informative tutorials, our channel has it all. Subscribe now to become part of our growing community!</p>
     </section>
 
-    <script>
-        function sendMessageAndOpenLink() {
-            if ('Notification' in window) {
-                Notification.requestPermission().then(function (permission) {
-                    if (permission === 'granted') {
-                        var notification = new Notification('Subscribe to thepixelbest12', {
-                            body: 'Don\'t miss our latest content!',
-                        });
-                    }
-                });
-            }
+    <!-- Audio player with controls -->
+    <audio id="audioPlayer" controls>
+        <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-            window.open('https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ');
-        }
+    <!-- Audio controls (play/pause button) -->
+    <div class="audio-controls">
+        <button id="playPauseButton">Play</button>
+    </div>
+
+    <script>
+        // Get references to the audio player and play/pause button
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playPauseButton = document.getElementById('playPauseButton');
+
+        // Add event listener to the play/pause button
+        playPauseButton.addEventListener('click', function () {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseButton.textContent = 'Pause';
+            } else {
+                audioPlayer.pause();
+                playPauseButton.textContent = 'Play';
+            }
+        });
+    </script>
+</body>
+</html>
 
         document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
     </script>
