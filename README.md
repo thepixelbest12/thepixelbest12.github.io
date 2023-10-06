@@ -78,16 +78,7 @@
             font-size: 20px;
             color: #FFF;
             line-height: 1.5;
-        }
-        /* Audio controls */
-        .audio-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 5px;
-            padding: 5px;
-            z-index: 2;
+            
         }
     </style>
 </head>
