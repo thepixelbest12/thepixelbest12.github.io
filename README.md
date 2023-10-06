@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -135,11 +134,6 @@
                 playPauseButton.textContent = 'Play';
             }
         });
-    </script>
-</body>
-</html>
-
-        document.getElementById('subscribeButton').addEventListener('click', sendMessageAndOpenLink);
     </script>
 </body>
 </html>
