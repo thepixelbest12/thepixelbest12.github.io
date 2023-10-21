@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,7 +62,7 @@
         }
         .btn:hover {
             background-color: #FF6600;
-            transform: scale(1.05); /* Add scale effect on hover */
+            transform: scale(1.05);
         }
         .about-section {
             background-color: rgba(0, 0, 0, 0.7);
@@ -78,7 +79,6 @@
             font-size: 20px;
             color: #FFF;
             line-height: 1.5;
-            
         }
     </style>
 </head>
