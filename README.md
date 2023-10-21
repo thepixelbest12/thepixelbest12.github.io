@@ -2,25 +2,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page - Subscribe</title>
+    <title>Welcome to thepixelbest12</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
     
     <style>
         body {
-            /* Background image properties */
-            background-image: url('Apple in universe.jpg');
+            background-image: url('background.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center center;
-            color: #FFF; /* Text color */
+            color: #333; /* Text color */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: rgba(0, 0, 0, 0.8); /* Background color with opacity */
+            background-color: #3498db; /* Light blue background color */
             padding: 20px;
             text-align: center;
             position: fixed; /* Fixed header */
@@ -30,7 +29,7 @@
             border-bottom-right-radius: 20px; /* Rounded bottom-right corner */
         }
         header a {
-            color: #FF4500; /* Link color */
+            color: #FFF; /* Link color */
             text-decoration: none;
             margin: 0 20px; /* Spacing between links */
             font-weight: bold;
@@ -39,19 +38,21 @@
         .hero {
             padding: 100px 0;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7); /* Background color with opacity */
+            background-color: #27ae60; /* Green background color */
             border-radius: 20px; /* Rounded corners */
         }
         .hero h1 {
             font-size: 48px;
             margin-bottom: 20px;
+            color: #FFF; /* White text color */
         }
         .hero p {
             font-size: 24px;
             margin-bottom: 40px;
+            color: #FFF; /* White text color */
         }
         .btn {
-            background-color: #FF4500; /* Button background color */
+            background-color: #e74c3c; /* Red button background color */
             color: #FFF; /* Button text color */
             padding: 15px 30px; /* Button size */
             text-decoration: none;
@@ -61,24 +62,51 @@
             transition: background-color 0.3s, transform 0.2s; /* Hover effect */
         }
         .btn:hover {
-            background-color: #FF6600; /* Button background color on hover */
+            background-color: #c0392b; /* Red button background color on hover */
             transform: scale(1.05); /* Add scale effect on hover */
         }
         .about-section {
-            background-color: rgba(0, 0, 0, 0.7); /* Background color with opacity */
+            background-color: #f39c12; /* Orange background color */
             padding: 100px 0;
             text-align: center;
             border-radius: 20px; /* Rounded corners */
         }
         .about-section h2 {
             font-size: 36px;
-            color: #FF4500; /* Heading color */
+            color: #FFF; /* White heading color */
             margin-bottom: 20px;
         }
         .about-section p {
             font-size: 20px;
-            color: #FFF; /* Text color */
+            color: #FFF; /* White text color */
             line-height: 1.5;
+        }
+
+        .fun-facts {
+            background-color: #f1c40f; /* Yellow background color */
+            padding: 50px 0;
+            text-align: center;
+        }
+        .fun-facts h3 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #333; /* Text color */
+        }
+        .fun-facts p {
+            font-size: 18px;
+            color: #333; /* Text color */
+        }
+
+        .shapes {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .rectangle {
+            width: 100px;
+            height: 60px;
+            background-color: #e67e22; /* Orange color */
+            display: inline-block;
+            margin: 10px;
         }
     </style>
 </head>
@@ -88,7 +116,7 @@
         <a href="about.html" target="_blank">About Us</a> <!-- Opens in a new tab -->
     </header>
 
-    <div class="hero">
+    <div class "hero">
         <h1>👇 Welcome to Our Channel 👇</h1>
         <p>Join our community and discover incredible content. Subscribe now for exciting updates!</p>
         <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" class="btn" target="_blank">Subscribe Now</a> <!-- Opens in a new tab -->
@@ -99,33 +127,15 @@
         <p>We are thepixelbest12, a team of passionate content creators dedicated to delivering top-quality content that entertains, educates, and inspires. From captivating videos to informative tutorials, our channel has it all. Subscribe now to become part of our growing community!</p>
     </section>
 
-    <!-- Audio player with controls -->
-    <audio id="audioPlayer" controls>
-        <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <section class="fun-facts">
+        <h3>Fun Facts</h3>
+        <p>Did you know that we have over 1 million subscribers and counting? Join our global community!</p>
+    </section>
 
-    <!-- Audio controls (play/pause button) -->
-    <div class="audio-controls">
-        <button id="playPauseButton">Play</button>
+    <div class="shapes">
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
     </div>
-
-    <script>
-        // Get references to the audio player and play/pause button
-        const audioPlayer = document.getElementById('audioPlayer');
-        const playPauseButton = document.getElementById('playPauseButton');
-
-        // Add event listener to the play/pause button
-        playPauseButton.addEventListener('click', function () {
-            if (audioPlayer.paused) {
-                audioPlayer.play();
-                playPauseButton.textContent = 'Pause';
-            } else {
-                audioPlayer.pause();
-                playPauseButton.textContent = 'Play';
-            }
-        });
-    </script>
 </body>
 </html>
-
