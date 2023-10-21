@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,38 +8,39 @@
     
     <style>
         body {
+            /* Background image properties */
             background-image: url('Apple in universe.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center center;
-            color: #FFF;
+            color: #FFF; /* Text color */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.8); /* Background color with opacity */
             padding: 20px;
             text-align: center;
-            position: fixed;
+            position: fixed; /* Fixed header */
             width: 100%;
-            z-index: 1;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
+            z-index: 1; /* Layer on top of other elements */
+            border-bottom-left-radius: 20px; /* Rounded bottom-left corner */
+            border-bottom-right-radius: 20px; /* Rounded bottom-right corner */
         }
         header a {
-            color: #FF4500;
+            color: #FF4500; /* Link color */
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 20px; /* Spacing between links */
             font-weight: bold;
             font-size: 18px;
         }
         .hero {
             padding: 100px 0;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Background color with opacity */
+            border-radius: 20px; /* Rounded corners */
         }
         .hero h1 {
             font-size: 48px;
@@ -51,33 +51,33 @@
             margin-bottom: 40px;
         }
         .btn {
-            background-color: #FF4500;
-            color: #FFF;
-            padding: 15px 30px;
+            background-color: #FF4500; /* Button background color */
+            color: #FFF; /* Button text color */
+            padding: 15px 30px; /* Button size */
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 5px; /* Rounded corners */
             cursor: pointer;
             font-size: 20px;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s, transform 0.2s; /* Hover effect */
         }
         .btn:hover {
-            background-color: #FF6600;
-            transform: scale(1.05);
+            background-color: #FF6600; /* Button background color on hover */
+            transform: scale(1.05); /* Add scale effect on hover */
         }
         .about-section {
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.7); /* Background color with opacity */
             padding: 100px 0;
             text-align: center;
-            border-radius: 20px;
+            border-radius: 20px; /* Rounded corners */
         }
         .about-section h2 {
             font-size: 36px;
-            color: #FF4500;
+            color: #FF4500; /* Heading color */
             margin-bottom: 20px;
         }
         .about-section p {
             font-size: 20px;
-            color: #FFF;
+            color: #FFF; /* Text color */
             line-height: 1.5;
         }
     </style>
@@ -128,3 +128,4 @@
     </script>
 </body>
 </html>
+
