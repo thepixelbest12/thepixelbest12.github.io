@@ -8,12 +8,8 @@
     
     <style>
         body {
-            background-image: url('background.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center center;
-            color: #333; /* Text color */
+            background-color: #000; /* Black background */
+            color: #FFF; /* Text color */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -36,10 +32,9 @@
             font-size: 18px;
         }
         .hero {
+            background-color: #27ae60; /* Green background color */
             padding: 100px 0;
             text-align: center;
-            background-color: #27ae60; /* Green background color */
-            border-radius: 20px; /* Rounded corners */
         }
         .hero h1 {
             font-size: 48px;
@@ -69,7 +64,6 @@
             background-color: #f39c12; /* Orange background color */
             padding: 100px 0;
             text-align: center;
-            border-radius: 20px; /* Rounded corners */
         }
         .about-section h2 {
             font-size: 36px;
@@ -82,29 +76,15 @@
             line-height: 1.5;
         }
 
-        .fun-facts {
-            background-color: #f1c40f; /* Yellow background color */
-            padding: 50px 0;
-            text-align: center;
-        }
-        .fun-facts h3 {
-            font-size: 30px;
-            margin-bottom: 10px;
-            color: #333; /* Text color */
-        }
-        .fun-facts p {
-            font-size: 18px;
-            color: #333; /* Text color */
-        }
-
         .shapes {
             text-align: center;
             margin-top: 30px;
         }
-        .rectangle {
+        .circle {
             width: 100px;
-            height: 60px;
-            background-color: #e67e22; /* Orange color */
+            height: 100px;
+            background-color: #3498db; /* Light blue color */
+            border-radius: 50%; /* Circular shape */
             display: inline-block;
             margin: 10px;
         }
@@ -127,15 +107,10 @@
         <p>We are thepixelbest12, a team of passionate content creators dedicated to delivering top-quality content that entertains, educates, and inspires. From captivating videos to informative tutorials, our channel has it all. Subscribe now to become part of our growing community!</p>
     </section>
 
-    <section class="fun-facts">
-        <h3>Fun Facts</h3>
-        <p>Did you know that we have over 1 million subscribers and counting? Join our global community!</p>
-    </section>
-
     <div class="shapes">
-        <div class="rectangle"></div>
-        <div class="rectangle"></div>
-        <div class="rectangle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
     </div>
 </body>
 </html>
