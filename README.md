@@ -125,4 +125,13 @@
         <a href="https://drive.google.com/drive/folders/1rM-JMsFNk9Oje1O19SYXMTUaAM91aTiy?usp=drive_link" target="_blank" class="link-btn">Everything Needed To Download</a>
 
         <!-- Secondary link button -->
-        <a href="https://youtu.be/fACRP3DWWbk" target="_blank"
+        <a href="https://youtu.be/fACRP3DWWbk" target="_blank" class="secondary-link-btn">Watch Instructional Video</a>
+    </div>
+
+    <!-- Audio player with controls and loop attribute -->
+    <audio id="audioPlayer" controls loop>
+        <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+</html>
