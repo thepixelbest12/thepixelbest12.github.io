@@ -86,6 +86,22 @@
             margin-right: 10px;
             transition: background-color 0.3s, transform 0.2s;
         }
+        /* Additional style for the download link */
+        .download-btn {
+            background-color: #4CAF50;
+            color: #FFF;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -95,7 +111,7 @@
     </header>
 
     <div class="hero">
-        <h1> Welcome to the channel </h1>
+        <h1>Welcome to the channel</h1>
         <p>Join our community and discover incredible content. Subscribe now for exciting updates!</p>
         <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" class="btn">Subscribe Now</a>
     </div>
@@ -103,6 +119,9 @@
     <div class="audio-controls">
         <!-- Loop button in the top left corner -->
         <button class="loop-btn" id="loopButton" onclick="toggleLoop()">Loop: Off</button>
+
+        <!-- Download link for the Monterey macOS ISO file -->
+        <a href="https://example.com/path/to/Monterey-macOS.iso" download class="download-btn">Download Monterey macOS</a>
     </div>
 
     <!-- Audio player with controls and loop attribute -->
