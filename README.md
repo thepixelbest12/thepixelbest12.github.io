@@ -91,7 +91,7 @@
             transform: scale(1.05);
         }
         .secondary-link-btn {
-            background-color: #4285F4; /* YouTube Red */
+            background-color: #4CAF50; /* Matching the color of the link button */
             color: #FFF;
             padding: 10px;
             text-decoration: none;
@@ -103,7 +103,7 @@
             display: block;
         }
         .secondary-link-btn:hover {
-            background-color: #3171C8; /* Darker shade on hover */
+            background-color: #45a049;
             transform: scale(1.05);
         }
     </style>
@@ -123,6 +123,9 @@
     <div class="audio-controls">
         <!-- Link button in the top left corner -->
         <a href="https://drive.google.com/drive/folders/1rM-JMsFNk9Oje1O19SYXMTUaAM91aTiy?usp=drive_link" target="_blank" class="link-btn">Everything Needed To Download</a>
+
+        <!-- Additional link button for Monterey macOS ISO -->
+        <a href="https://mega.nz/file/9TUlGabA#8GyqTmJX7vD2r8G45fjguom9CVfHNl9a1cRvbsHFB8Y" target="_blank" class="link-btn">Monterey macOS ISO</a>
 
         <!-- Secondary link button -->
         <a href="https://youtu.be/fACRP3DWWbk" target="_blank" class="secondary-link-btn">Watch Instructional Video</a>
