@@ -75,19 +75,7 @@
             right: 20px;
             z-index: 2;
         }
-        .loop-btn {
-            background-color: #FF4500;
-            color: #FFF;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-right: 10px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        /* Additional style for the download link */
-        .download-btn {
+        .link-btn {
             background-color: #4CAF50;
             color: #FFF;
             padding: 10px;
@@ -98,7 +86,7 @@
             margin-right: 10px;
             transition: background-color 0.3s, transform 0.2s;
         }
-        .download-btn:hover {
+        .link-btn:hover {
             background-color: #45a049;
             transform: scale(1.05);
         }
@@ -117,11 +105,8 @@
     </div>
 
     <div class="audio-controls">
-        <!-- Loop button in the top left corner -->
-        <button class="loop-btn" id="loopButton" onclick="toggleLoop()">Loop: Off</button>
-
-        <!-- Download link for the Monterey macOS ISO file -->
-        <a href="https://example.com/path/to/Monterey-macOS.iso" download class="download-btn">Download Monterey macOS</a>
+        <!-- Link button in the top left corner -->
+        <a href="https://your-link-here.com" target="_blank" class="link-btn">Open Link</a>
     </div>
 
     <!-- Audio player with controls and loop attribute -->
@@ -130,21 +115,5 @@
         Your browser does not support the audio element.
     </audio>
 
-    <script>
-        // Get reference to the loop button
-        const loopButton = document.getElementById('loopButton');
-
-        // Add event listener to the loop button
-        function toggleLoop() {
-            const audioPlayer = document.getElementById('audioPlayer');
-            if (audioPlayer.loop) {
-                audioPlayer.loop = false;
-                loopButton.textContent = 'Loop: Off';
-            } else {
-                audioPlayer.loop = true;
-                loopButton.textContent = 'Loop: On';
-            }
-        }
-    </script>
 </body>
 </html>
