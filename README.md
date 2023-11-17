@@ -90,6 +90,22 @@
             background-color: #45a049;
             transform: scale(1.05);
         }
+        .secondary-link-btn {
+            background-color: #4285F4; /* YouTube Red */
+            color: #FFF;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.2s;
+            display: block;
+        }
+        .secondary-link-btn:hover {
+            background-color: #3171C8; /* Darker shade on hover */
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -107,13 +123,6 @@
     <div class="audio-controls">
         <!-- Link button in the top left corner -->
         <a href="https://drive.google.com/drive/folders/1rM-JMsFNk9Oje1O19SYXMTUaAM91aTiy?usp=drive_link" target="_blank" class="link-btn">Everything Needed To Download</a>
-    </div>
 
-    <!-- Audio player with controls and loop attribute -->
-    <audio id="audioPlayer" controls loop>
-        <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-</body>
-</html>
+        <!-- Secondary link button -->
+        <a href="https://youtu.be/fACRP3DWWbk" target="_blank"
