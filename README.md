@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page - Subscribe</title>
+    <title>Combined Page</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="32x32">
 
@@ -49,9 +49,9 @@
             font-size: 24px;
             margin-bottom: 40px;
         }
-        .btn {
-            background-color: #FF4500;
-            color: #FFF;
+        .btn,
+        .link-btn,
+        .secondary-link-btn {
             padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
@@ -59,9 +59,30 @@
             font-size: 20px;
             transition: background-color 0.3s, transform 0.2s;
         }
+        .btn {
+            background-color: #FF4500;
+            color: #FFF;
+        }
         .btn:hover {
             background-color: #FF6600;
             transform: scale(1.05);
+        }
+        .link-btn,
+        .secondary-link-btn {
+            background-color: #4CAF50;
+            color: #FFF;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .link-btn:hover,
+        .secondary-link-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        .secondary-link-btn {
+            margin-top: 10px;
+            display: block;
         }
         .audio-controls {
             position: fixed;
@@ -74,50 +95,6 @@
             top: 20px;
             right: 20px;
             z-index: 2;
-        }
-        .link-btn,
-        .secondary-link-btn {
-            background-color: #4CAF50;
-            color: #FFF;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-right: 10px;
-            transition: background-color 0.3s, transform 0.2s;
-            display: inline-block;
-        }
-        .link-btn:hover,
-        .secondary-link-btn:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
-        .secondary-link-btn {
-            margin-top: 10px;
-            display: block;
-        }
-        .help-section {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 200px;
-            z-index: 2;
-        }
-        .help-section h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #4CAF50;
-        }
-        .help-section a {
-            display: block;
-            color: #FFF;
-            text-decoration: none;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-        .help-section a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -144,14 +121,5 @@
         <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-
-    <!-- Help section on the left -->
-    <div class="help-section">
-        <h2>Everything needed for Monterey macOS ISO:</h2>
-        <a href="link1.html" target="_blank">Helpful Link 1</a>
-        <a href="link2.html" target="_blank">Helpful Link 2</a>
-        <a href="link3.html" target="_blank">Helpful Link 3</a>
-        <!-- Add more links as needed -->
-    </div>
 </body>
 </html>
