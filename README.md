@@ -61,7 +61,7 @@
         }
         .btn:hover {
             background-color: #FF6600;
-            transform: scale(1.05); /* Add scale effect on hover */
+            transform: scale(1.05);
         }
         .audio-controls {
             position: fixed;
@@ -75,36 +75,49 @@
             right: 20px;
             z-index: 2;
         }
-        .link-btn {
+        .link-btn,
+        .secondary-link-btn {
             background-color: #4CAF50;
             color: #FFF;
-            padding: 10px;
+            padding: 15px 30px;
             text-decoration: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
             margin-right: 10px;
             transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
         }
-        .link-btn:hover {
+        .link-btn:hover,
+        .secondary-link-btn:hover {
             background-color: #45a049;
             transform: scale(1.05);
         }
         .secondary-link-btn {
-            background-color: #4CAF50; /* Matching the color of the link button */
-            color: #FFF;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
             margin-top: 10px;
-            transition: background-color 0.3s, transform 0.2s;
             display: block;
         }
-        .secondary-link-btn:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
+        .help-section {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            z-index: 2;
+        }
+        .help-section h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        .help-section a {
+            display: block;
+            color: #FFF;
+            text-decoration: none;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .help-section a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -121,13 +134,8 @@
     </div>
 
     <div class="audio-controls">
-        <!-- Link button in the top left corner -->
-        <a href="https://drive.google.com/drive/folders/1rM-JMsFNk9Oje1O19SYXMTUaAM91aTiy?usp=drive_link" target="_blank" class="link-btn">Everything Needed To Download</a>
-
-        <!-- Additional link button for Monterey macOS ISO -->
+        <a href="https://youtu.be/Vw9ieCaPhmk?si=h7t-T1EjnTgglFe-" target="_blank" class="link-btn">How to Video</a>
         <a href="https://mega.nz/file/9TUlGabA#8GyqTmJX7vD2r8G45fjguom9CVfHNl9a1cRvbsHFB8Y" target="_blank" class="link-btn">Monterey macOS ISO</a>
-
-        <!-- Secondary link button -->
         <a href="https://youtu.be/fACRP3DWWbk" target="_blank" class="secondary-link-btn">Watch Instructional Video</a>
     </div>
 
@@ -136,5 +144,14 @@
         <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <!-- Help section on the left -->
+    <div class="help-section">
+        <h2>Everything needed for Monterey macOS ISO:</h2>
+        <a href="link1.html" target="_blank">Helpful Link 1</a>
+        <a href="link2.html" target="_blank">Helpful Link 2</a>
+        <a href="link3.html" target="_blank">Helpful Link 3</a>
+        <!-- Add more links as needed -->
+    </div>
 </body>
 </html>
