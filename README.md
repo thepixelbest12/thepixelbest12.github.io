@@ -113,7 +113,7 @@
     <div class="audio-controls">
         <a href="https://youtu.be/Vw9ieCaPhmk?si=h7t-T1EjnTgglFe-" target="_blank" class="link-btn">How to Video</a>
         <a href="https://mega.nz/file/9TUlGabA#8GyqTmJX7vD2r8G45fjguom9CVfHNl9a1cRvbsHFB8Y" target="_blank" class="link-btn">Monterey macOS ISO</a>
-        <a href="https://youtu.be/fACRP3DWWbk" target="_blank" class="secondary-link-btn">Watch Instructional Video</a>
+        <a href="https://youtu.be/fACRP3DWWbk" target="_blank" class="secondary-link-btn">How to make VMware full screen in macOS 12</a>
     </div>
 
     <!-- Audio player with controls and loop attribute -->
