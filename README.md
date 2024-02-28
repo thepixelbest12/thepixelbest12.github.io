@@ -108,6 +108,7 @@
         <h1>Welcome to the channel</h1>
         <p>Join our community and discover incredible content. Subscribe now for exciting updates!</p>
         <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" class="btn">Subscribe Now</a>
+        <a href="https://www.youtube.com/@HAITHAM-ps8vy/videos" class="link-btn">Visit YouTube Channel</a>
     </div>
 
     <div class="audio-controls">
@@ -123,3 +124,4 @@
     </audio>
 </body>
 </html>
+
