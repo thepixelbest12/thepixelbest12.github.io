@@ -90,7 +90,8 @@
             left: 20px;
             z-index: 2;
         }
-        #audioPlayer {
+        #audioPlayer1,
+        #audioPlayer2 {
             position: fixed;
             top: 20px;
             right: 20px;
@@ -117,11 +118,19 @@
         <a href="https://youtu.be/fACRP3DWWbk" target="_blank" class="secondary-link-btn">How to make VMware full screen in macOS 12</a>
     </div>
 
-    <!-- Audio player with controls and loop attribute -->
-    <audio id="audioPlayer" controls loop>
+    <!-- Audio players with controls and loop attribute -->
+    <h2>السلام عليك</h2>
+    <audio id="audioPlayer1" controls loop>
+        <source src="Assalamu Alayka.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <h2>طاهر قلبي</h2>
+    <audio id="audioPlayer2" controls loop>
         <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 </body>
 </html>
+
 
