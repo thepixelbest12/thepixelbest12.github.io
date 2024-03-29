@@ -97,6 +97,17 @@
             right: 20px;
             z-index: 2;
         }
+        .dialog {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #FFF;
+            border-radius: 10px;
+            padding: 10px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -119,18 +130,46 @@
     </div>
 
     <!-- Audio players with controls and loop attribute -->
-    <h2>السلام عليك</h2>
+    <h2>Assalamu Alayka</h2>
     <audio id="audioPlayer1" controls loop>
         <source src="Assalamu Alayka.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <div id="dialog1" class="dialog">
+        <p>Assalamu Alayka - Description Here</p>
+    </div>
 
-    <h2>طاهر قلبي</h2>
+    <h2>طاهر قلبي نقي ذاكر لله</h2>
     <audio id="audioPlayer2" controls loop>
         <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <div id="dialog2" class="dialog">
+        <p>طاهر قلبي نقي ذاكر لله - Description Here</p>
+    </div>
+
+    <script>
+        // JavaScript to show/hide the dialog for each audio player
+        const dialog1 = document.getElementById('dialog1');
+        const dialog2 = document.getElementById('dialog2');
+        const audioPlayer1 = document.getElementById('audioPlayer1');
+        const audioPlayer2 = document.getElementById('audioPlayer2');
+
+        audioPlayer1.addEventListener('play', function() {
+            dialog1.style.display = 'block';
+        });
+
+        audioPlayer1.addEventListener('pause', function() {
+            dialog1.style.display = 'none';
+        });
+
+        audioPlayer2.addEventListener('play', function() {
+            dialog2.style.display = 'block';
+        });
+
+        audioPlayer2.addEventListener('pause', function() {
+            dialog2.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
-
-
