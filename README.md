@@ -87,26 +87,22 @@
         .audio-controls {
             position: fixed;
             top: 20px;
-            left: 20px;
-            z-index: 2;
-        }
-        #audioPlayer1,
-        #audioPlayer2 {
-            position: fixed;
-            top: 20px;
             right: 20px;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
         }
         .dialog {
             background-color: rgba(0, 0, 0, 0.8);
             color: #FFF;
             border-radius: 10px;
             padding: 10px;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 2;
+            margin-top: 10px;
             display: none;
+        }
+        audio {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -124,52 +120,28 @@
     </div>
 
     <div class="audio-controls">
-        <a href="https://youtu.be/Vw9ieCaPhmk?si=h7t-T1EjnTgglFe-" target="_blank" class="link-btn">How to Video</a>
-        <a href="https://mega.nz/file/9TUlGabA#8GyqTmJX7vD2r8G45fjguom9CVfHNl9a1cRvbsHFB8Y" target="_blank" class="link-btn">Monterey macOS ISO</a>
-        <a href="https://youtu.be/fACRP3DWWbk" target="_blank" class="secondary-link-btn">How to make VMware full screen in macOS 12</a>
-    </div>
+        <div class="dialog" id="dialog1">
+            <p>Assalamu Alayka - Description Here</p>
+        </div>
+        <audio controls loop onclick="toggleDialog('dialog1')">
+            <source src="Assalamu Alayka.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
 
-    <!-- Audio players with controls and loop attribute -->
-    <h2>Assalamu Alayka</h2>
-    <audio id="audioPlayer1" controls loop>
-        <source src="Assalamu Alayka.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <div id="dialog1" class="dialog">
-        <p>Assalamu Alayka - Description Here</p>
-    </div>
-
-    <h2>طاهر قلبي نقي ذاكر لله</h2>
-    <audio id="audioPlayer2" controls loop>
-        <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <div id="dialog2" class="dialog">
-        <p>طاهر قلبي نقي ذاكر لله - Description Here</p>
+        <div class="dialog" id="dialog2">
+            <p>طاهر قلبي نقي ذاكر لله - Description Here</p>
+        </div>
+        <audio controls loop onclick="toggleDialog('dialog2')">
+            <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <script>
-        // JavaScript to show/hide the dialog for each audio player
-        const dialog1 = document.getElementById('dialog1');
-        const dialog2 = document.getElementById('dialog2');
-        const audioPlayer1 = document.getElementById('audioPlayer1');
-        const audioPlayer2 = document.getElementById('audioPlayer2');
-
-        audioPlayer1.addEventListener('play', function() {
-            dialog1.style.display = 'block';
-        });
-
-        audioPlayer1.addEventListener('pause', function() {
-            dialog1.style.display = 'none';
-        });
-
-        audioPlayer2.addEventListener('play', function() {
-            dialog2.style.display = 'block';
-        });
-
-        audioPlayer2.addEventListener('pause', function() {
-            dialog2.style.display = 'none';
-        });
+        function toggleDialog(dialogId) {
+            var dialog = document.getElementById(dialogId);
+            dialog.style.display = (dialog.style.display === "none") ? "block" : "none";
+        }
     </script>
 </body>
 </html>
