@@ -115,8 +115,8 @@
     <div class="hero">
         <h1>Welcome to the channel</h1>
         <p>Join our community and discover incredible content. Subscribe now for exciting updates!</p>
-        <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" class="btn">Subscribe Now</a>
-        <a href="https://www.youtube.com/@HAITHAM-ps8vy/videos" class="link-btn">Visit YouTube Channel</a>
+        <a href="https://www.youtube.com/channel/UCJaTw3e1tqrff_nTTZmChzQ" class="btn"></a>
+        <a href="https://www.youtube.com/@HAITHAM-ps8vy/videos" class="link-btn"></a>
     </div>
 
     <div class="audio-controls">
@@ -124,12 +124,12 @@
             <p>Assalamu Alayka - Description Here</p>
         </div>
         <audio controls loop onclick="toggleDialog('dialog1')">
-            <source src="Assalamu Alayka.mp3" type="audio/mpeg">
+            <source src="Assalamu Alaka.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
 
         <div class="dialog" id="dialog2">
-            <p>طاهر قلبي نقي ذاكر لله - Description Here</p>
+            <p>طاهر قبي نقي ذاكر لله - Description Here</p>
         </div>
         <audio controls loop onclick="toggleDialog('dialog2')">
             <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
