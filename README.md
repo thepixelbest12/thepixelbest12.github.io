@@ -124,12 +124,12 @@
             <p>Assalamu Alayka - Description Here</p>
         </div>
         <audio controls loop onclick="toggleDialog('dialog1')">
-            <source src="Assalamu Alaka.mp3" type="audio/mpeg">
+            <source src="Assalam Alaka.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
 
         <div class="dialog" id="dialog2">
-            <p>طاهر قبي نقي ذاكر لله - Description Here</p>
+            <p>طاهرقبي نقي ذاكر لله - Description Here</p>
         </div>
         <audio controls loop onclick="toggleDialog('dialog2')">
             <source src="طاهر قلبي نقي ذاكر لله.mp3" type="audio/mpeg">
