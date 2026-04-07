@@ -109,7 +109,7 @@
 <body>
     <header>
         <a href="#">Home</a>
-        <a href="about.html">About Us</a>
+        <a href="Game.html">About Us</a>
     </header>
 
     <div class="hero">
