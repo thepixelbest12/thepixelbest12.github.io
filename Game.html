@@ -10832,10 +10832,10 @@
             
             if (activeEngine && activeEngine.ccall) {
               // Modification 1: Multiply default vehicle speed cap (Increased Power)
-              activeEngine.ccall('setVehicleSpeedMultiplier', 'void', ['number'], [3.5]); 
+              activeEngine.ccall('setVehicleSpeedMultiplier', 'void', ['number'], [5]); 
               
               // Modification 2: Multiply wheel tire friction constraint (Increased Traction)
-              activeEngine.ccall('setWheelFrictionCoefficient', 'void', ['number'], [4.0]);
+              activeEngine.ccall('setWheelFrictionCoefficient', 'void', ['number'], [5]);
             }
           }
         } catch(e) {
