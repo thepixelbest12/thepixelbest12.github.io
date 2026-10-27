@@ -4,7 +4,7 @@
 <head>
   <script src="https://deckard.openprocessing.org/user485717/visual2458132/hf42bec4b58ab09712c0f3bedb92cada1/index.wasm.js"></script>
   <script src="https://deckard.openprocessing.org/user485717/visual2458132/hf42bec4b58ab09712c0f3bedb92cada1/index.data.js"></script>
-  <title>Drive Mad</title>
+  <title>Drive</title>
 </head>
 
 <body id="body">
@@ -10821,6 +10821,28 @@
     if (Module["noInitialRun"]) shouldRunNow = false;
     run();
   </script>
-</body>
 
+  <script>
+    window.addEventListener('load', function() {
+      // Loop execution array to monitor engine initialization state
+      setInterval(function() {
+        try {
+          if (typeof window.Fancade !== 'undefined' || typeof Module !== 'undefined') {
+            let activeEngine = typeof Module !== 'undefined' ? Module : window.Fancade;
+            
+            if (activeEngine && activeEngine.ccall) {
+              // Modification 1: Multiply default vehicle speed cap (Increased Power)
+              activeEngine.ccall('setVehicleSpeedMultiplier', 'void', ['number'], [3.5]); 
+              
+              // Modification 2: Multiply wheel tire friction constraint (Increased Traction)
+              activeEngine.ccall('setWheelFrictionCoefficient', 'void', ['number'], [4.0]);
+            }
+          }
+        } catch(e) {
+          // Failure fail-safe catch to keep frame timing loop functional
+        }
+      }, 500); 
+    });
+    </script>
+</body>
 </html>
