@@ -1,498 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drive Mad Web</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #70e1fd;
-            font-family: 'Arial Black', sans-serif;
-            user-select: none;
-        }
-        #game-container {
-            width: 100vw;
-            height: 100vh;
-        }
-        #ui-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-        }
-        
-        /* Level Splash Text */
-        #level-splash {
-            background: rgba(255, 255, 255, 0.9);
-            border: 4px solid #222;
-            border-radius: 12px;
-            padding: 15px 40px;
-            color: #222;
-            font-size: 32px;
-            box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
-            text-align: center;
-            transition: opacity 0.5s ease;
-            opacity: 0;
-            position: absolute;
-        }
+  <base href="https://cdn.jsdelivr.net/gh/genizy/dmad-poki@49b5ab6b987f5f3be58f9dae59c92e8fc1aab9b0/">
+  <script>
+  window.assgdd = {
+    "ancestorOrigins": {
+        "0": "https://games.poki.com",
+        "1": "https://poki.com"
+    },
+    "href": "https://f9564e4e-ef25-4e4b-ba67-cb11a1576bbd.poki-gdn.com/cc1bc57a-e355-4696-97c2-097bf6188606/index.html?country=US&url_referrer=https%3A%2F%2Fpoki.com%2F&site_id=3&iso_lang=en&poki_url=https%3A%2F%2Fpoki.com%2Fen%2Fg%2Fdrive-mad&hoist=yes&nonPersonalized=n&cloudsavegames=n&familyFriendly=n&categories=78%2C93%2C96%2C103%2C377%2C390%2C400%2C893%2C929%2C1126%2C1139%2C1140%2C1141%2C1143%2C1147%2C1163%2C1185%2C1190%2C1193%2C1197&special_condition=landing&game_id=f9564e4e-ef25-4e4b-ba67-cb11a1576bbd&game_version_id=cc1bc57a-e355-4696-97c2-097bf6188606&inspector=0",
+    "origin": "https://f9564e4e-ef25-4e4b-ba67-cb11a1576bbd.poki-gdn.com",
+    "protocol": "https:",
+    "host": "f9564e4e-ef25-4e4b-ba67-cb11a1576bbd.poki-gdn.com",
+    "hostname": "f9564e4e-ef25-4e4b-ba67-cb11a1576bbd.poki-gdn.com",
+    "port": "",
+    "pathname": "/cc1bc57a-e355-4696-97c2-097bf6188606/index.html",
+    "search": "?country=US&url_referrer=https%3A%2F%2Fpoki.com%2F&site_id=3&iso_lang=en&poki_url=https%3A%2F%2Fpoki.com%2Fen%2Fg%2Fdrive-mad&hoist=yes&nonPersonalized=n&cloudsavegames=n&familyFriendly=n&categories=78%2C93%2C96%2C103%2C377%2C390%2C400%2C893%2C929%2C1126%2C1139%2C1140%2C1141%2C1143%2C1147%2C1163%2C1185%2C1190%2C1193%2C1197&special_condition=landing&game_id=f9564e4e-ef25-4e4b-ba67-cb11a1576bbd&game_version_id=cc1bc57a-e355-4696-97c2-097bf6188606&inspector=0",
+    "hash": ""
+}
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        /* Win Screen */
-        #win-screen {
-            display: none;
-            background: white;
-            border: 5px solid #222;
-            border-radius: 16px;
-            padding: 30px 60px;
-            box-shadow: 10px 10px 0px rgba(0,0,0,0.3);
-            text-align: center;
-            position: absolute;
-        }
-        #win-screen h1 { margin: 0; font-size: 48px; color: #222; }
-        #win-screen p { font-family: sans-serif; font-weight: bold; color: #666; margin-top: 10px;}
+  <title>Drive Mad</title>
+  <meta name="description" content="">
+  <meta name="google" content="notranslate">
 
-        /* Level Select Menu */
-        #menu-overlay {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 20;
-            pointer-events: auto;
-        }
-        .menu-box {
-            background: white;
-            border: 5px solid #222;
-            border-radius: 16px;
-            width: 80%;
-            max-width: 600px;
-            height: 70vh;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-        .menu-title { text-align: center; font-size: 32px; color: #222; margin-bottom: 20px; }
-        .level-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 10px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-        .level-btn {
-            background: #00a2ff;
-            color: white;
-            border: 3px solid #222;
-            border-radius: 8px;
-            padding: 15px 0;
-            text-align: center;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 3px 3px 0px #111;
-        }
-        .level-btn.locked { background: #999; cursor: not-allowed; box-shadow: none;}
-    </style>
-    <!-- Import 3D Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cannon@0.6.2/build/cannon.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="webapp/fancade.css">
+  <link rel="icon" href="webapp/favicon.ico">
+
+  <!-- POKI SDK -->
+  <script src="poki-sdk.js" ></script>
 </head>
-<body>
 
-    <div id="game-container"></div>
+<body id="body">
 
-    <div id="ui-layer">
-        <div id="level-splash">
-            <div id="splash-title">LEVEL 1</div>
-            <div id="splash-name" style="font-size: 18px; color: #666; font-family: sans-serif; margin-top: 5px;">FIRST DRIVE</div>
-        </div>
-        <div id="win-screen">
-            <h1>GREAT!</h1>
-            <p>Press ENTER to continue</p>
-        </div>
+  <!-- Modal dialog div -->
+  <div id="modal_parent">
+    <div id="modal_content">
+      <span id="modal_close_button">&times;</span>
+      <div id="store_link_modal_content" class="modal_inner"></div>
+      <div id="share_file_modal_content" class="modal_inner"></div>
     </div>
+  </div>
 
-    <div id="menu-overlay">
-        <div class="menu-box">
-            <div class="menu-title">SELECT LEVEL</div>
-            <div class="level-grid" id="level-grid"></div>
+  <!-- 
+      Game canvas and overlay. Emscripten makes some assumptions about how the canvas is positioned in order
+      to translate document to game coordinates
+    -->
+  <div id="canvas_border" class="emscripten_border">
+    <div id="play_content" class="middle center">
+      <div class="edge">
+        <div class="box">
+          <div class="black">
+            <img src="webapp/cover.jpg" class="cover">
+            <p class="title">Drive Mad</p>
+            <p class="author">Fancade</p>
+          </div>
         </div>
+      </div>
+      <div id="progress_or_play">
+        <progress id="progress" class="loading" value="0" max="100"></progress>
+      </div>
+      <p class="description"></p>
     </div>
+    <canvas class="emscripten" id="canvas" tabindex=-1>
+    </canvas>
+    <div id="gradient"></div>
+    <div id="webview_content"></div>
+  </div>
 
-    <script>
-        // --- GAME CONFIGURATION ---
-        const CAR_SPEED = 45;        // Engine Torque
-        const FRICTION = 12.0;       // Tire Grip (High to prevent slipping)
-        const GRAVITY_Y = -30;       // Downforce
-        
-        let currentLevel = 1;
-        let highestLevel = parseInt(localStorage.getItem('driveMadSave')) || 1;
-        let gameState = "PLAYING";   // PLAYING, WIN
-        let menuOpen = false;
+  <!-- Manual JS, Called from WASM -->
+  <script type="text/javascript" src="webapp/source_min.js"></script>
 
-        let scene, camera, renderer, world;
-        let carBody, wheelBodies = [], visualChassis, visualWheels = [];
-        let trackBodies = [], trackMeshes = [];
-        let finishLineX = 0;
-        
-        let keys = { forward: false, backward: false };
-
-        init();
-        animate();
-
-        function init() {
-            // 1. THREE.JS SETUP (Graphics)
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x70e1fd);
-            scene.fog = new THREE.Fog(0x70e1fd, 20, 80);
-
-            // Isometric Camera Angle
-            const aspect = window.innerWidth / window.innerHeight;
-            const d = 12;
-            camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 0.1, 1000);
-            camera.position.set(15, 10, 15);
-            camera.lookAt(0, 0, 0);
-
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.shadowMap.enabled = true;
-            document.getElementById('game-container').appendChild(renderer.domElement);
-
-            // Lighting
-            scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-            const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
-            dirLight.position.set(20, 50, 20);
-            dirLight.castShadow = true;
-            dirLight.shadow.mapSize.width = 2048;
-            dirLight.shadow.mapSize.height = 2048;
-            scene.add(dirLight);
-
-            // 2. CANNON.JS SETUP (Physics)
-            world = new CANNON.World();
-            world.gravity.set(0, GRAVITY_Y, 0);
-            world.broadphase = new CANNON.NaiveBroadphase();
-            world.solver.iterations = 10;
-
-            // Tire Physics Material
-            const tireMat = new CANNON.Material('tire');
-            const groundMat = new CANNON.Material('ground');
-            const tireGroundContact = new CANNON.ContactMaterial(tireMat, groundMat, {
-                friction: FRICTION,
-                restitution: 0.1
-            });
-            world.addContactMaterial(tireGroundContact);
-
-            // 3. BUILD THE GAME
-            buildCar(tireMat);
-            buildLevel(currentLevel, groundMat);
-
-            // 4. INPUT LISTENERS
-            window.addEventListener('keydown', handleKeyDown);
-            window.addEventListener('keyup', handleKeyUp);
-            window.addEventListener('resize', onWindowResize);
-            
-            showSplash();
-        }
-
-        function buildCar(tireMaterial) {
-            // Car Chassis (Physics Box)
-            const chassisShape = new CANNON.Box(new CANNON.Vec3(2.5, 0.5, 1.5));
-            carBody = new CANNON.Body({ mass: 150 });
-            carBody.addShape(chassisShape);
-            carBody.position.set(-5, 3, 0);
-            carBody.angularDamping = 0.5; // Prevents infinite spinning
-            world.addBody(carBody);
-
-            // Car Visuals (Yellow Block)
-            visualChassis = new THREE.Group();
-            const bodyGeo = new THREE.BoxGeometry(5, 1, 3);
-            const bodyMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.4 });
-            const bodyMesh = new THREE.Mesh(bodyGeo, bodyMat);
-            bodyMesh.castShadow = true;
-            visualChassis.add(bodyMesh);
-
-            // Cabin (Black Block)
-            const cabGeo = new THREE.BoxGeometry(2, 0.8, 2.5);
-            const cabMat = new THREE.MeshStandardMaterial({ color: 0x111111 });
-            const cabMesh = new THREE.Mesh(cabGeo, cabMat);
-            cabMesh.position.set(-0.5, 0.9, 0);
-            cabMesh.castShadow = true;
-            visualChassis.add(cabMesh);
-            scene.add(visualChassis);
-
-            // Wheels (Physics Spheres for smooth rolling, Visual Cylinders)
-            const wheelShape = new CANNON.Sphere(1.0);
-            const wheelPositions = [
-                new CANNON.Vec3(-2, -0.5, 1.8), // Front Left
-                new CANNON.Vec3(2, -0.5, 1.8),  // Rear Left
-                new CANNON.Vec3(-2, -0.5, -1.8),// Front Right
-                new CANNON.Vec3(2, -0.5, -1.8)  // Rear Right
-            ];
-
-            // Visual wheel geometry (Cylinders rotated sideways)
-            const wheelGeo = new THREE.CylinderGeometry(1, 1, 0.8, 16);
-            wheelGeo.rotateX(Math.PI / 2);
-            const wheelMat = new THREE.MeshStandardMaterial({ color: 0x222222 });
-
-            for (let i = 0; i < 4; i++) {
-                // Physics Wheel
-                const wBody = new CANNON.Body({ mass: 20, material: tireMaterial });
-                wBody.addShape(wheelShape);
-                wBody.position.copy(carBody.position).vadd(wheelPositions[i]);
-                world.addBody(wBody);
-                wheelBodies.push(wBody);
-
-                // Hinge constraint to attach wheel to car
-                const axis = new CANNON.Vec3(0, 0, 1);
-                const hinge = new CANNON.HingeConstraint(carBody, wBody, {
-                    pivotA: wheelPositions[i],
-                    axisA: axis,
-                    pivotB: new CANNON.Vec3(0, 0, 0),
-                    axisB: axis
-                });
-                world.addConstraint(hinge);
-
-                // Visual Wheel
-                const wMesh = new THREE.Mesh(wheelGeo, wheelMat);
-                wMesh.castShadow = true;
-                scene.add(wMesh);
-                visualWheels.push(wMesh);
-            }
-        }
-
-        function buildLevel(levelNum, groundMaterial) {
-            // Clear old level
-            trackMeshes.forEach(m => scene.remove(m));
-            trackBodies.forEach(b => world.removeBody(b));
-            trackMeshes = [];
-            trackBodies = [];
-
-            // Simple Procedural Generator based on level number
-            let x = -10;
-            let segments = 15 + Math.floor(levelNum / 10);
-            let seed = levelNum * 100;
-
-            function random() {
-                let val = Math.sin(seed++) * 10000;
-                return val - Math.floor(val);
-            }
-
-            // Starting platform
-            createBlock(x, 0, 20, 4, 10, groundMaterial, 0x5ba044, 0x2e5a22);
-            x += 10;
-
-            for (let i = 0; i < segments; i++) {
-                let r = random();
-                let length = 10 + Math.floor(random() * 10);
-                let height = 4;
-
-                if (r < 0.3 && i > 2) {
-                    // Gap jump
-                    x += 5 + random() * 5;
-                } else if (r < 0.6 && i > 2) {
-                    // Elevation
-                    x += length / 2;
-                    createBlock(x, height, length, height, 10, groundMaterial, 0xc23a3a, 0x555555);
-                } else {
-                    // Normal ground
-                    x += length / 2;
-                    createBlock(x, 0, length, height, 10, groundMaterial, 0xe68a22, 0x333333);
-                }
-                x += length / 2;
-            }
-
-            // Finish Line
-            finishLineX = x;
-            createBlock(x + 2, 0, 2, 4, 10, groundMaterial, 0xffffff, 0xffffff);
-        }
-
-        function createBlock(x, y, w, h, d, material, topColor, sideColor) {
-            // Physics
-            const shape = new CANNON.Box(new CANNON.Vec3(w/2, h/2, d/2));
-            const body = new CANNON.Body({ mass: 0, material: material });
-            body.addShape(shape);
-            body.position.set(x, y - h/2, 0); // Adjust so top is at 'y'
-            world.addBody(body);
-            trackBodies.push(body);
-
-            // Visual
-            const geo = new THREE.BoxGeometry(w, h, d);
-            const mat = new THREE.MeshStandardMaterial({ color: topColor, roughness: 0.8 });
-            const mesh = new THREE.Mesh(geo, mat);
-            mesh.position.set(x, y - h/2, 0);
-            mesh.receiveShadow = true;
-            mesh.castShadow = true;
-            scene.add(mesh);
-            trackMeshes.push(mesh);
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            if (gameState === "PLAYING" && !menuOpen) {
-                // Apply Engine Torque to wheels
-                if (keys.forward) {
-                    wheelBodies.forEach(w => w.angularVelocity.z = -CAR_SPEED);
-                } else if (keys.backward) {
-                    wheelBodies.forEach(w => w.angularVelocity.z = CAR_SPEED);
-                } else {
-                    // Brake/Coast
-                    wheelBodies.forEach(w => {
-                        w.angularVelocity.z *= 0.9; 
-                        w.angularVelocity.x *= 0.9;
-                    });
-                }
-
-                // Lock car to 2D plane (Prevents drifting off track)
-                carBody.position.z = 0;
-                carBody.velocity.z = 0;
-                carBody.angularVelocity.x = 0;
-                carBody.angularVelocity.y = 0;
-
-                // Check Win Condition
-                if (carBody.position.x > finishLineX) {
-                    gameState = "WIN";
-                    document.getElementById('win-screen').style.display = 'block';
-                    if (currentLevel === highestLevel) {
-                        highestLevel++;
-                        localStorage.setItem('driveMadSave', highestLevel);
-                    }
-                }
-            }
-
-            if (!menuOpen) {
-                world.step(1 / 60);
-            }
-
-            // Sync Visuals with Physics
-            visualChassis.position.copy(carBody.position);
-            visualChassis.quaternion.copy(carBody.quaternion);
-
-            for (let i = 0; i < 4; i++) {
-                visualWheels[i].position.copy(wheelBodies[i].position);
-                visualWheels[i].quaternion.copy(wheelBodies[i].quaternion);
-            }
-
-            // Isometric Camera Follow
-            camera.position.x = carBody.position.x + 15;
-            camera.position.y = 12;
-            camera.position.z = 15;
-            camera.lookAt(carBody.position.x + 5, 0, 0);
-
-            renderer.render(scene, camera);
-        }
-
-        // --- INPUT HANDLING ---
-        function handleKeyDown(e) {
-            if (e.key === 'w' || e.key === 'ArrowUp') keys.forward = true;
-            if (e.key === 's' || e.key === 'ArrowDown') keys.backward = true;
-            
-            if (e.key === 'r' || e.key === 'R') resetCar();
-            
-            if (e.key === 'Enter' && gameState === "WIN") {
-                nextLevel();
-            } else if (e.key === 'Enter' || e.key === 'Escape') {
-                toggleMenu();
-            }
-        }
-
-        function handleKeyUp(e) {
-            if (e.key === 'w' || e.key === 'ArrowUp') keys.forward = false;
-            if (e.key === 's' || e.key === 'ArrowDown') keys.backward = false;
-        }
-
-        // --- UI & GAME STATE ---
-        function resetCar() {
-            carBody.position.set(-5, 3, 0);
-            carBody.velocity.set(0, 0, 0);
-            carBody.angularVelocity.set(0, 0, 0);
-            carBody.quaternion.set(0, 0, 0, 1);
-            wheelBodies.forEach(w => {
-                w.position.set(-5, 2, 0);
-                w.velocity.set(0, 0, 0);
-                w.angularVelocity.set(0, 0, 0);
-            });
-            gameState = "PLAYING";
-            document.getElementById('win-screen').style.display = 'none';
-        }
-
-        function nextLevel() {
-            currentLevel++;
-            document.getElementById('win-screen').style.display = 'none';
-            // Rebuild level
-            const tireMaterial = world.contactmaterials[0].materials[0];
-            const groundMaterial = world.contactmaterials[0].materials[1];
-            buildLevel(currentLevel, groundMaterial);
-            resetCar();
-            showSplash();
-        }
-
-        function showSplash() {
-            const splash = document.getElementById('level-splash');
-            document.getElementById('splash-title').innerText = "LEVEL " + currentLevel;
-            
-            // Generate fun name
-            const names = ["FIRST DRIVE", "THE GAP", "CRASH ZONE", "HIGH RISE", "MEGA JUMP", "DESERT RUN"];
-            document.getElementById('splash-name').innerText = names[currentLevel % names.length];
-
-            splash.style.opacity = '1';
-            setTimeout(() => {
-                if(!menuOpen) splash.style.opacity = '0';
-            }, 1500);
-        }
-
-        function toggleMenu() {
-            menuOpen = !menuOpen;
-            const menu = document.getElementById('menu-overlay');
-            menu.style.display = menuOpen ? 'flex' : 'none';
-            if (menuOpen) buildMenuGrid();
-        }
-
-        function buildMenuGrid() {
-            const grid = document.getElementById('level-grid');
-            grid.innerHTML = '';
-            // Show first 50 levels to save browser memory
-            for (let i = 1; i <= 50; i++) {
-                const btn = document.createElement('div');
-                btn.className = 'level-btn' + (i > highestLevel ? ' locked' : '');
-                btn.innerText = i;
-                if (i <= highestLevel) {
-                    btn.onclick = () => {
-                        currentLevel = i;
-                        toggleMenu();
-                        const tireMaterial = world.contactmaterials[0].materials[0];
-                        const groundMaterial = world.contactmaterials[0].materials[1];
-                        buildLevel(currentLevel, groundMaterial);
-                        resetCar();
-                        showSplash();
-                    };
-                }
-                grid.appendChild(btn);
-            }
-        }
-
-        function onWindowResize() {
-            const aspect = window.innerWidth / window.innerHeight;
-            const d = 12;
-            camera.left = -d * aspect;
-            camera.right = d * aspect;
-            camera.top = d;
-            camera.bottom = -d;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-    </script>
+  <!-- Auto generated JS -->
+  <script type="text/javascript" src="webapp/index.js"></script>
 </body>
+
 </html>
