@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drive Mad - Remake</title>
+    <title>Drive Mad</title>
     <style>
         body {
             margin: 0;
@@ -25,21 +25,23 @@
             pointer-events: none;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 25px;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 30px;
             box-sizing: border-box;
             z-index: 5;
         }
-        .hud-panel {
-            background: #fff;
+        .level-splash {
+            background: rgba(255, 255, 255, 0.95);
             border: 4px solid #222;
             border-radius: 12px;
-            padding: 8px 24px;
+            padding: 10px 30px;
             color: #222;
-            font-size: 24px;
-            box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
-            pointer-events: auto;
-            cursor: pointer;
+            font-size: 28px;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.15);
+            text-align: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
         #status-screen {
             position: absolute;
@@ -52,38 +54,23 @@
         }
         .status-card {
             background: white;
-            border: 4px solid #222;
+            border: 5px solid #222;
             border-radius: 16px;
-            padding: 20px 40px;
-            box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+            padding: 25px 50px;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.25);
             margin-bottom: 15px;
         }
         #status-title {
             color: #222;
-            font-size: 42px;
+            font-size: 46px;
             margin: 0;
         }
-        .btn {
-            background: #00a2ff;
-            color: white;
-            border: 4px solid #222;
-            padding: 14px 36px;
-            font-size: 22px;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 4px 4px 0px #111;
-            font-family: 'Arial Black', sans-serif;
-            transition: transform 0.05s;
-            pointer-events: auto;
-        }
-        .btn:hover {
-            background: #00c2ff;
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #111;
-        }
-        .btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #111;
+        .hint-text {
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            font-weight: bold;
         }
         #menu-overlay {
             position: absolute;
@@ -91,7 +78,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             display: none;
             justify-content: center;
             align-items: center;
@@ -99,18 +86,18 @@
         }
         .menu-content {
             background: white;
-            border: 4px solid #222;
+            border: 5px solid #222;
             border-radius: 16px;
-            width: 80%;
+            width: 85%;
             max-width: 600px;
-            max-height: 70vh;
+            max-height: 75vh;
             padding: 30px;
             box-shadow: 10px 10px 0px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
         }
         .menu-header {
-            font-size: 32px;
+            font-size: 34px;
             color: #222;
             margin-top: 0;
             margin-bottom: 20px;
@@ -118,7 +105,7 @@
         }
         .level-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
             gap: 12px;
             overflow-y: auto;
             padding: 10px;
@@ -129,7 +116,7 @@
             color: white;
             border: 3px solid #222;
             border-radius: 8px;
-            padding: 15px 5px;
+            padding: 12px 5px;
             text-align: center;
             font-size: 18px;
             cursor: pointer;
@@ -138,37 +125,27 @@
         .level-cell.locked {
             background: #9ca3af;
             cursor: not-allowed;
-            opacity: 0.6;
+            opacity: 0.5;
         }
     </style>
-    <script src="https://cloudflare.com"></script>
-    <script src="https://cloudflare.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
 </head>
 <body>
 
     <div id="canvas-container"></div>
 
     <div id="ui-layer">
-        <div style="display: flex; justify-content: space-between; width: 100%; pointer-events: none;">
-            <div class="hud-panel" id="level-display" onclick="toggleMenu(true)">MENU ☰</div>
-            <div class="hud-panel" id="name-display" style="background: #fff; cursor: default; pointer-events: none;">FIRST DRIVE</div>
+        <div class="level-splash" id="splash-panel">
+            <div id="splash-level">DRIVE 1</div>
+            <div id="splash-name" style="font-size: 18px; color: #555; margin-top: 2px;">FIRST DRIVE</div>
         </div>
         
         <div id="status-screen">
             <div class="status-card">
                 <h1 id="status-title">GREAT!</h1>
+                <div class="hint-text">Press ENTER to Continue</div>
             </div>
-            <button class="btn" id="action-btn" onclick="handleAction()">NEXT LEVEL</button>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
-            <div class="hud-panel" style="font-size: 13px; font-family: sans-serif; font-weight: bold; background: #fff; cursor: default; pointer-events: none;">
-                CONTROLS:
-                <div style="color: #555; margin-top: 4px;">W / Up Arrow : Accelerate</div>
-                <div style="color: #555;">S / Down Arrow : Reverse</div>
-                <div style="color: #222; font-weight: bold; margin-top: 2px;">R : Reset Position</div>
-            </div>
-            <button class="btn" onclick="resetLevel()">RESTART</button>
         </div>
     </div>
 
@@ -176,7 +153,6 @@
         <div class="menu-content">
             <div class="menu-header">SELECT DRIVE</div>
             <div class="level-grid" id="level-grid-container"></div>
-            <button class="btn" onclick="toggleMenu(false)" style="align-self: center;">CLOSE</button>
         </div>
     </div>
 
@@ -188,6 +164,7 @@
         let currentLevel = 1;
         let highestUnlockedLevel = 1;
         let gameState = "PLAYING"; 
+        let menuOpen = false;
         
         let scene, camera, renderer;
         let world, carBody, wheelBodies = [];
@@ -212,7 +189,12 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.shadowMap.enabled = true;
             renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            document.getElementById('canvas-container').appendChild(renderer.shadowMap.context ? renderer.domElement : document.createElement('div'));
+
+            if(renderer.domElement) {
+                document.getElementById('canvas-container').innerHTML = "";
+                document.getElementById('canvas-container').appendChild(renderer.domElement);
+            }
 
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
             scene.add(ambientLight);
@@ -240,34 +222,33 @@
             });
             world.addContactMaterial(contactMat);
 
-            updateHUD();
+            triggerSplash();
             generateLevelTrack(currentLevel, groundMat);
             spawnVehicle(wheelMat);
 
             window.addEventListener('keydown', (e) => handleInputs(e, true));
             window.addEventListener('keyup', (e) => handleInputs(e, false));
             window.addEventListener('resize', onWindowResize);
-            buildMenuGrid();
         }
 
         function getLevelName(num) {
             if (num === 1) return "FIRST DRIVE";
             if (num === 999) return "ULTIMATE VICTORY";
-            
             const prefixes = ["THE", "MONSTER", "HIGH", "SECRET", "CRASH", "CRAZY", "MEGA", "SPEED"];
             const midforms = ["GAP", "BRIDGE", "RAMP", "CLIFF", "WALL", "STEP", "DESERT", "CHALLENGE"];
             const suffixes = ["JUMP", "DASH", "CROSS", "CLIMB", "FALL", "ZONE", "TRACK", "ROAD"];
-            
-            let p = prefixes[num % prefixes.length];
-            let m = midforms[(num * 3) % midforms.length];
-            let s = suffixes[(num * 7) % suffixes.length];
-            
-            return p + " " + m + " " + s;
+            return prefixes[num % prefixes.length] + " " + midforms[(num * 3) % midforms.length] + " " + suffixes[(num * 7) % suffixes.length];
         }
 
-        function updateHUD() {
-            document.getElementById('level-display').innerText = "DRIVE " + currentLevel + " ☰";
-            document.getElementById('name-display').innerText = getLevelName(currentLevel);
+        function triggerSplash() {
+            const panel = document.getElementById('splash-panel');
+            document.getElementById('splash-level').innerText = "DRIVE " + currentLevel;
+            document.getElementById('splash-name').innerText = getLevelName(currentLevel);
+            panel.style.opacity = '1';
+            
+            setTimeout(() => {
+                if (gameState === "PLAYING") panel.style.opacity = '0';
+            }, 1500);
         }
 
         function buildMenuGrid() {
@@ -279,241 +260,297 @@
                 cell.innerText = i;
                 
                 if (i <= highestUnlockedLevel) {
+                    cell.onclick = function() {
+                        currentLevel = i;
+                        triggerSplash();
+                        generateLevelTrack(currentLevel, trackElements[0].physics.material);
+                        resetLevel();
+                        toggleMenu(false);
+                    };
+                } else {
+                    cell.className = "level-cell locked";
+                }
+                container.appendChild(cell);
+            }
+        }
 
+        function toggleMenu(forceState) {
+            menuOpen = (forceState !== undefined) ? forceState : !menuOpen;
+            document.getElementById('menu-overlay').style.display = menuOpen ? 'flex' : 'none';
+            if(menuOpen) buildMenuGrid();
+        }
 
-cell.onclick = function() {
-currentLevel = i;
-updateHUD();
-generateLevelTrack(currentLevel, trackElements[0].physics.material);
-resetLevel();
-toggleMenu(false);
-};
-} else {
-cell.className = "level-cell locked";
-}
-container.appendChild(cell);
-}
-}
-function toggleMenu(show) {
-document.getElementById('menu-overlay').style.display = show ? 'flex' : 'none';
-if(show) buildMenuGrid();
-}
-function generateLevelTrack(levelNum, material) {
-trackElements.forEach(el => {
-scene.remove(el.visual);
-world.remove(el.physics);
-});
-trackElements = [];
-function seededRandom(s) {
-let x = Math.sin(s++) * 10000;
-return x - Math.floor(x);
-}
-let currentX = -10;
-let currentY = 0;
-createVoxelBlock(currentX, currentY, 20, 6, 8, material, 0x6bb343, 0x4a2e1b);
-currentX += 10;
-let segments = 12 + Math.floor(levelNum * 0.12);
-let seed = levelNum * 82.14;
-for (let i = 0; i < segments; i++) {
-let r1 = seededRandom(seed++);
-let r2 = seededRandom(seed++);
-let blockLength = 8 + Math.floor(r1 * 10);
-let blockHeight = 6;
-if (r2 < 0.28 && i > 1 && i < segments - 2) {
-let gapWidth = 5 + (r1 * 6) + (levelNum * 0.005);
-currentX += (blockLength / 2) + gapWidth;
-} else if (r2 < 0.60 && i > 1) {
-let step = 1.5 + (r1 * 3);
-currentY += step;
-currentX += (blockLength / 2);
-} else if (r2 < 0.78 && i > 1) {
-let drop = 1.5 + (r1 * 2.5);
-currentY -= drop;
-currentX += (blockLength / 2);
-} else {
-currentX += (blockLength / 2);
-}
-let primaryColor = 0xe68a22;
-if (levelNum > 20) primaryColor = 0xc23a3a;
-if (i === segments - 1) primaryColor = 0x3b82f6;
-createVoxelBlock(currentX, currentY, blockLength, blockHeight, 8, material, primaryColor, 0x333333);
-currentX += (blockLength / 2);
-}
-createCheckeredFinish(currentX + 3, currentY + 3.1, 4, 0.2, 8, material);
-window.finishLineX = currentX + 1.5;
-}
-function createVoxelBlock(x, y, w, h, d, material, topColor, sideColor) {
-const shape = new CANNON.Box(new CANNON.Vec3(w/2, h/2, d/2));
-const body = new CANNON.Body({ mass: 0, material: material });
-body.addShape(shape);
-body.position.set(x, y, 0);
-world.addBody(body);
-const container = new THREE.Group();
-const topGeo = new THREE.BoxGeometry(w, 0.4, d);
-const topMat = new THREE.MeshStandardMaterial({ color: topColor, roughness: 0.9 });
-const topMesh = new THREE.Mesh(topGeo, topMat);
-topMesh.position.y = (h/2) - 0.2;
-topMesh.castShadow = true;
-topMesh.receiveShadow = true;
-container.add(topMesh);
-const baseGeo = new THREE.BoxGeometry(w, h - 0.4, d);
-const baseMat = new THREE.MeshStandardMaterial({ color: sideColor || 0x555555, roughness: 0.9 });
-const baseMesh = new THREE.Mesh(baseGeo, baseMat);
-baseMesh.position.y = -0.2;
-baseMesh.castShadow = true;
-baseMesh.receiveShadow = true;
-container.add(baseMesh);
-container.position.set(x, y, 0);
-scene.add(container);
-trackElements.push({ physics: body, visual: container });
-}
-function createCheckeredFinish(x, y, w, h, d, material) {
-const shape = new CANNON.Box(new CANNON.Vec3(w/2, h/2, d/2));
-const body = new CANNON.Body({ mass: 0, material: material });
-body.addShape(shape);
-body.position.set(x, y, 0);
-world.addBody(body);
-const finishGroup = new THREE.Group();
-const size = 1;
-for(let iw = 0; iw < w; iw++) {
-for(let id = 0; id < d; id++) {
-const cGeo = new THREE.BoxGeometry(size, h, size);
-const isWhite = (iw + id) % 2 === 0;
-const cMat = new THREE.MeshStandardMaterial({ color: isWhite ? 0xffffff : 0x111111 });
-const cMesh = new THREE.Mesh(cGeo, cMat);
-cMesh.position.set(iw - w/2 + size/2, 0, id - d/2 + size/2);
-finishGroup.add(cMesh);
-}
-}
-finishGroup.position.set(x, y, 0);
-scene.add(finishGroup);
-trackElements.push({ physics: body, visual: finishGroup });
-}
-function spawnVehicle(wheelMaterial) {
-const chassisShape = new CANNON.Box(new CANNON.Vec3(2.2, 0.7, 1.4));
-carBody = new CANNON.Body({ mass: 200 });
-carBody.addShape(chassisShape);
-carBody.position.set(-5, 5, 0);
-world.addBody(carBody);
-visualChassis = new THREE.Group();
-const mainBodyGeo = new THREE.BoxGeometry(4.4, 1.0, 2.8);
-const yellowMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.4 });
-const mainBodyMesh = new THREE.Mesh(mainBodyGeo, yellowMat);
-mainBodyMesh.castShadow = true;
-visualChassis.add(mainBodyMesh);
-const cabGeo = new THREE.BoxGeometry(2.0, 0.9, 2.4);
-const cabMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.2 });
-const cabMesh = new THREE.Mesh(cabGeo, cabMat);
-cabMesh.position.set(-0.4, 0.95, 0);
-cabMesh.castShadow = true;
-visualChassis.add(cabMesh);
-const grillGeo = new THREE.BoxGeometry(0.2, 0.5, 2.2);
-const silverMat = new THREE.MeshStandardMaterial({ color: 0xe5e7eb, roughness: 0.3 });
-const grill = new THREE.Mesh(grillGeo, silverMat);
-grill.position.set(2.2, -0.1, 0);
-visualChassis.add(grill);
-scene.add(visualChassis);
-const wheelShape = new CANNON.Sphere(1.2);
-const wheelPositions = [
-new CANNON.Vec3(-1.6, -0.8, 1.7), new CANNON.Vec3(1.6, -0.8, 1.7),
-new CANNON.Vec3(-1.6, -0.8, -1.7), new CANNON.Vec3(1.6, -0.8, -1.7)
-];
-const wheelGeo = new THREE.CylinderGeometry(1.2, 1.2, 0.9, 16);
-wheelGeo.rotateX(Math.PI / 2);
-const tireMat = new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.9 });
-const rimGeo = new THREE.CylinderGeometry(0.5, 0.5, 1.0, 12);
-rimGeo.rotateX(Math.PI / 2);
-for (let i = 0; i < 4; i++) {
-const wBody = new CANNON.Body({ mass: 40, material: wheelMaterial });
-wBody.addShape(wheelShape);
-wBody.position.copy(carBody.position).vadd(wheelPositions[i]);
-wBody.angularDamping = 0.3;
-world.addBody(wBody);
-wheelBodies.push(wBody);
-const axis = new CANNON.Vec3(0, 0, 1);
-const constraint = new CANNON.HingeConstraint(carBody, wBody, {
-pivotA: wheelPositions[i], axisA: axis, pivotB: new CANNON.Vec3(0,0,0), axisB: axis
-});
-world.addConstraint(constraint);
-const wGroup = new THREE.Group();
-const tireMesh = new THREE.Mesh(wheelGeo, tireMat);
-tireMesh.castShadow = true;
-wGroup.add(tireMesh);
-const rimMesh = new THREE.Mesh(rimGeo, silverMat);
-wGroup.add(rimMesh);
-scene.add(wGroup);
-visualWheels.push(wGroup);
-}
-}
-function handleInputs(e, isDown) {
-if (e.key === 'w' || e.key === 'ArrowUp') keys.forward = isDown;
-if (e.key === 's' || e.key === 'ArrowDown') keys.backward = isDown;
-if ((e.key === 'r' || e.key === 'R') && isDown) resetLevel();
-}
-function resetLevel() {
-carBody.position.set(-5, 5, 0);
-carBody.velocity.set(0,0,0);
-carBody.angularVelocity.set(0,0,0);
-carBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0,0,1), 0);
-wheelBodies.forEach((w) => {
-w.position.set(-5, 5, 0);
-w.velocity.set(0,0,0);
-w.angularVelocity.set(0,0,0);
-});
-gameState = "PLAYING";
-document.getElementById('status-screen').style.display = 'none';
-}
-function handleAction() {
-if (gameState === "WIN") {
-if (currentLevel < 999) currentLevel++;
-if (currentLevel > highestUnlockedLevel) {
-highestUnlockedLevel = currentLevel;
-localStorage.setItem('driveMadSaveLevel', highestUnlockedLevel);
-}
-updateHUD();
-generateLevelTrack(currentLevel, trackElements[0].physics.material);
-resetLevel();
-} else if (gameState === "FAIL") {
-resetLevel();
-}
-}
-function animate() {
-requestAnimationFrame(animate);
-if (gameState === "PLAYING") {
-const torque = CAR_SPEED;
-if (keys.forward) {
-wheelBodies.forEach(w => w.angularVelocity.z = -torque);
-} else if (keys.backward) {
-wheelBodies.forEach(w => w.angularVelocity.z = torque);
-}
-if (carBody.position.x > window.finishLineX) {
-gameState = "WIN";
-document.getElementById('status-title').innerText = currentLevel === 999 ? "VICTORY COMPLETE!" : "GREAT!";
-document.getElementById('action-btn').innerText = currentLevel === 999 ? "PLAY AGAIN" : "NEXT LEVEL";
-document.getElementById('status-screen').style.display = 'block';
-}
-if (carBody.position.y < -20) {
-gameState = "FAIL";
-document.getElementById('status-title').innerText = "FAILED!";
-document.getElementById('action-btn').innerText = "RETRY";
-document.getElementById('status-screen').style.display = 'block';
-}
-}
-world.step(1 / 60);
-visualChassis.position.copy(carBody.position);
-visualChassis.quaternion.copy(carBody.quaternion);
-for (let i = 0; i < 4; i++) {
-visualWheels[i].position.copy(wheelBodies[i].position);
-visualWheels[i].quaternion.copy(wheelBodies[i].quaternion);
-}
-camera.position.x = carBody.position.x + 14;
-camera.position.y = carBody.position.y + 5;
-camera.position.z = 15;
-camera.lookAt(carBody.position.x + 1, carBody.position.y, 0);
-renderer.render(scene, camera);
-}
-function onWindowResize() {
-camera.aspect = window.innerWidth / window.innerHeight;
-camera.updateProjectionMatrix();
-renderer.setSize(window.innerWidth, window.innerHeight);
-}
+        function generateLevelTrack(levelNum, material) {
+            trackElements.forEach(el => {
+                scene.remove(el.visual);
+                world.remove(el.physics);
+            });
+            trackElements = [];
+
+            function seededRandom(s) {
+                let x = Math.sin(s++) * 10000;
+                return x - Math.floor(x);
+            }
+
+            let currentX = -10;
+            let currentY = 0;
+            
+            createVoxelBlock(currentX, currentY, 20, 6, 8, material, 0x6bb343, 0x4a2e1b);
+            currentX += 10;
+
+            let segments = 12 + Math.floor(levelNum * 0.12);
+            let seed = levelNum * 82.14;
+
+            for (let i = 0; i < segments; i++) {
+                let r1 = seededRandom(seed++);
+                let r2 = seededRandom(seed++);
+                let blockLength = 8 + Math.floor(r1 * 10);
+                let blockHeight = 6;
+                
+                if (r2 < 0.28 && i > 1 && i < segments - 2) {
+                    let gapWidth = 5 + (r1 * 6) + (levelNum * 0.005);
+                    currentX += (blockLength / 2) + gapWidth;
+                } else if (r2 < 0.60 && i > 1) {
+                    let step = 1.5 + (r1 * 3);
+                    currentY += step;
+                    currentX += (blockLength / 2);
+                } else if (r2 < 0.78 && i > 1) {
+                    let drop = 1.5 + (r1 * 2.5);
+                    currentY -= drop;
+                    currentX += (blockLength / 2);
+                } else {
+                    currentX += (blockLength / 2);
+                }
+
+                let primaryColor = 0xe68a22; 
+                if (levelNum > 20) primaryColor = 0xc23a3a; 
+                if (i === segments - 1) primaryColor = 0x3b82f6; 
+
+                createVoxelBlock(currentX, currentY, blockLength, blockHeight, 8, material, primaryColor, 0x333333);
+                currentX += (blockLength / 2);
+            }
+
+            createCheckeredFinish(currentX + 3, currentY + 3.1, 4, 0.2, 8, material);
+            window.finishLineX = currentX + 1.5;
+        }
+
+        function createVoxelBlock(x, y, w, h, d, material, topColor, sideColor) {
+            const shape = new CANNON.Box(new CANNON.Vec3(w/2, h/2, d/2));
+            const body = new CANNON.Body({ mass: 0, material: material });
+            body.addShape(shape);
+            body.position.set(x, y, 0);
+            world.addBody(body);
+
+            const container = new THREE.Group();
+            const topGeo = new THREE.BoxGeometry(w, 0.4, d);
+            const topMat = new THREE.MeshStandardMaterial({ color: topColor, roughness: 0.9 });
+            const topMesh = new THREE.Mesh(topGeo, topMat);
+            topMesh.position.y = (h/2) - 0.2;
+            topMesh.castShadow = true;
+            topMesh.receiveShadow = true;
+            container.add(topMesh);
+
+            const baseGeo = new THREE.BoxGeometry(w, h - 0.4, d);
+            const baseMat = new THREE.MeshStandardMaterial({ color: sideColor || 0x555555, roughness: 0.9 });
+            const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+            baseMesh.position.y = -0.2;
+            baseMesh.castShadow = true;
+            baseMesh.receiveShadow = true;
+            container.add(baseMesh);
+
+            container.position.set(x, y, 0);
+            scene.add(container);
+            trackElements.push({ physics: body, visual: container });
+        }
+
+        function createCheckeredFinish(x, y, w, h, d, material) {
+            const shape = new CANNON.Box(new CANNON.Vec3(w/2, h/2, d/2));
+            const body = new CANNON.Body({ mass: 0, material: material });
+            body.addShape(shape);
+            body.position.set(x, y, 0);
+            world.addBody(body);
+
+            const finishGroup = new THREE.Group();
+            const size = 1;
+            for(let iw = 0; iw < w; iw++) {
+                for(let id = 0; id < d; id++) {
+                    const cGeo = new THREE.BoxGeometry(size, h, size);
+                    const isWhite = (iw + id) % 2 === 0;
+                    const cMat = new THREE.MeshStandardMaterial({ color: isWhite ? 0xffffff : 0x111111 });
+                    const cMesh = new THREE.Mesh(cGeo, cMat);
+                    cMesh.position.set(iw - w/2 + size/2, 0, id - d/2 + size/2);
+                    finishGroup.add(cMesh);
+                }
+            }
+            finishGroup.position.set(x, y, 0);
+            scene.add(finishGroup);
+            trackElements.push({ physics: body, visual: finishGroup });
+        }
+
+        function spawnVehicle(wheelMaterial) {
+            const chassisShape = new CANNON.Box(new CANNON.Vec3(2.2, 0.7, 1.4));
+            carBody = new CANNON.Body({ mass: 200 });
+            carBody.addShape(chassisShape);
+            carBody.position.set(-5, 5, 0);
+            world.addBody(carBody);
+
+            visualChassis = new THREE.Group();
+            const mainBodyGeo = new THREE.BoxGeometry(4.4, 1.0, 2.8);
+            const yellowMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, roughness: 0.4 });
+            const mainBodyMesh = new THREE.Mesh(mainBodyGeo, yellowMat);
+            mainBodyMesh.castShadow = true;
+            visualChassis.add(mainBodyMesh);
+
+            const cabGeo = new THREE.BoxGeometry(2.0, 0.9, 2.4);
+            const cabMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.2 });
+            const cabMesh = new THREE.Mesh(cabGeo, cabMat);
+            cabMesh.position.set(-0.4, 0.95, 0);
+            cabMesh.castShadow = true;
+            visualChassis.add(cabMesh);
+
+            const grillGeo = new THREE.BoxGeometry(0.2, 0.5, 2.2);
+            const silverMat = new THREE.MeshStandardMaterial({ color: 0xe5e7eb, roughness: 0.3 });
+            const grill = new THREE.Mesh(grillGeo, silverMat);
+            grill.position.set(2.2, -0.1, 0);
+            visualChassis.add(grill);
+
+            scene.add(visualChassis);
+
+            const wheelShape = new CANNON.Sphere(1.2);
+            const wheelPositions = [
+                new CANNON.Vec3(-1.6, -0.8, 1.7), new CANNON.Vec3(1.6, -0.8, 1.7), 
+                new CANNON.Vec3(-1.6, -0.8, -1.7), new CANNON.Vec3(1.6, -0.8, -1.7)
+            ];
+
+            const wheelGeo = new THREE.CylinderGeometry(1.2, 1.2, 0.9, 16);
+            wheelGeo.rotateX(Math.PI / 2);
+            const tireMat = new THREE.MeshStandardMaterial({ color: 0x1f2937, roughness: 0.9 });
+            const rimGeo = new THREE.CylinderGeometry(0.5, 0.5, 1.0, 12);
+            rimGeo.rotateX(Math.PI / 2);
+
+            for (let i = 0; i < 4; i++) {
+                const wBody = new CANNON.Body({ mass: 40, material: wheelMaterial });
+                wBody.addShape(wheelShape);
+                wBody.position.copy(carBody.position).vadd(wheelPositions[i]);
+                wBody.angularDamping = 0.3;
+                world.addBody(wBody);
+                wheelBodies.push(wBody);
+
+                const axis = new CANNON.Vec3(0, 0, 1);
+                const constraint = new CANNON.HingeConstraint(carBody, wBody, {
+                    pivotA: wheelPositions[i], axisA: axis, pivotB: new CANNON.Vec3(0,0,0), axisB: axis
+                });
+                world.addConstraint(constraint);
+
+                const wGroup = new THREE.Group();
+                const tireMesh = new THREE.Mesh(wheelGeo, tireMat);
+                tireMesh.castShadow = true;
+                wGroup.add(tireMesh);
+                const rimMesh = new THREE.Mesh(rimGeo, silverMat);
+                wGroup.add(rimMesh);
+
+                scene.add(wGroup);
+                visualWheels.push(wGroup);
+            }
+        }
+
+        function handleInputs(e, isDown) {
+            if (e.key === 'w' || e.key === 'ArrowUp' || e.key === 'd' || e.key === 'ArrowRight') keys.forward = isDown;
+            if (e.key === 's' || e.key === 'ArrowDown' || e.key === 'a' || e.key === 'ArrowLeft') keys.backward = isDown;
+            
+            if (isDown) {
+                if (e.key === 'r' || e.key === 'R') resetLevel();
+                if (e.key === 'Escape') {
+                    keys.forward = false; keys.backward = false;
+                    toggleMenu();
+                }
+                if (e.key === 'Enter') {
+                    if (gameState === "WIN") {
+                        handleAction();
+                    } else {
+                        keys.forward = false; keys.backward = false;
+                        toggleMenu();
+                    }
+                }
+            }
+        }
+
+        function resetLevel() {
+            carBody.position.set(-5, 5, 0);
+            carBody.velocity.set(0,0,0);
+            carBody.angularVelocity.set(0,0,0);
+            carBody.quaternion.setFromAxisAngle(new CANNON.Vec3(0,0,1), 0);
+            
+            wheelBodies.forEach((w) => {
+                w.position.set(-5, 5, 0);
+                w.velocity.set(0,0,0);
+                w.angularVelocity.set(0,0,0);
+            });
+
+            gameState = "PLAYING";
+            document.getElementById('status-screen').style.display = 'none';
+            triggerSplash();
+        }
+
+        function handleAction() {
+            if (currentLevel < 999) currentLevel++;
+            if (currentLevel > highestUnlockedLevel) {
+                highestUnlockedLevel = currentLevel;
+                localStorage.setItem('driveMadSaveLevel', highestUnlockedLevel);
+            }
+            generateLevelTrack(currentLevel, trackElements[0].physics.material);
+            resetLevel();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (gameState === "PLAYING" && !menuOpen) {
+                const torque = CAR_SPEED;
+                if (keys.forward) {
+                    wheelBodies.forEach(w => w.angularVelocity.z = -torque);
+                } else if (keys.backward) {
+                    wheelBodies.forEach(w => w.angularVelocity.z = torque);
+                } else {
+                    wheelBodies.forEach(w => w.angularVelocity.z = 0);
+                }
+
+                if (carBody.position.x > window.finishLineX) {
+                    gameState = "WIN";
+                    document.getElementById('status-screen').style.display = 'block';
+                    document.getElementById('splash-panel').style.opacity = '0';
+                }
+
+                if (carBody.position.y < -20) {
+                    resetLevel();
+                }
+            }
+
+            if (!menuOpen) {
+                world.step(1 / 60);
+            }
+
+            visualChassis.position.copy(carBody.position);
+            visualChassis.quaternion.copy(carBody.quaternion);
+
+            for (let i = 0; i < 4; i++) {
+                visualWheels[i].position.copy(wheelBodies[i].position);
+                visualWheels[i].quaternion.copy(wheelBodies[i].quaternion);
+            }
+
+            camera.position.x = carBody.position.x + 14;
+            camera.position.y = carBody.position.y + 5;
+            camera.position.z = 15;
+            camera.lookAt(carBody.position.x + 1, carBody.position.y, 0);
+
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+    </script>
+</body>
+</html>
