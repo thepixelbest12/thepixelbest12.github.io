@@ -10822,37 +10822,33 @@
     run();
   </script>
 
- <script>
-    // Intercept browser timing cycles to alter internal physics step execution speeds
-    (function() {
-      // 1. Target the requestAnimationFrame animation clock engine
-      const originalRAF = window.requestAnimationFrame;
-      window.requestAnimationFrame = function(callback) {
-        return originalRAF(function(time) {
-          // Double the delta time step to force faster vehicle updates
-          callback(time);
-        });
-      };
+<script>
+    window.addEventListener('load', function() {
+      setInterval(function() {
+        try {
+          let engineInstance = (typeof Module !== 'undefined') ? Module : window.Fancade;
+          
+          if (engineInstance) {
+            if (engineInstance.ccall) {
+              engineInstance.ccall('setGravityScale', 'void', ['number'], [4.5]);
+            } else if (engineInstance._setGravityY) {
+              engineInstance._setGravityY(-38.0);
+            }
 
-      // 2. Target the engine background delta-tick clocks
-      const originalSetTimeout = window.setTimeout;
-      window.setTimeout = function(handler, timeout, ...args) {
-        // Cut timeout delays in half to accelerate physics execution rates
-        if (timeout > 0 && timeout < 100) {
-          timeout = Math.max(1, timeout / 2);
+            if (typeof window.FancadeInput !== 'undefined' || typeof window.onkeydown !== 'undefined') {
+              const originalHandler = window.onkeydown;
+              window.onkeydown = function(event) {
+                if (event.key === 'ArrowUp' || event.key === 'w' || event.key === 'd') {
+                  if(engineInstance._applyEngineTorque) engineInstance._applyEngineTorque(500);
+                }
+                if (originalHandler) originalHandler(event);
+              };
+            }
+          }
+        } catch (error) {
         }
-        return originalSetTimeout(handler, timeout, ...args);
-      };
-      
-      const originalSetInterval = window.setInterval;
-      window.setInterval = function(handler, timeout, ...args) {
-        // Accelerate repeating layout updates to speed up top acceleration
-        if (timeout > 0 && timeout < 100) {
-          timeout = Math.max(1, timeout / 2);
-        }
-        return originalSetInterval(handler, timeout, ...args);
-      };
-    })();
+      }, 1000);
+    });
   </script>
 </body>
 </html>
