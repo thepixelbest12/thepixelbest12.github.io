@@ -8,7 +8,7 @@
 
     <style>
         body {
-            background-image: url('Apple in universe.jpg');
+            background-image: url('Android in universe.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
