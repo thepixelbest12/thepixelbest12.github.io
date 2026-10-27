@@ -10822,27 +10822,37 @@
     run();
   </script>
 
-  <script>
-    window.addEventListener('load', function() {
-      // Loop execution array to monitor engine initialization state
-      setInterval(function() {
-        try {
-          if (typeof window.Fancade !== 'undefined' || typeof Module !== 'undefined') {
-            let activeEngine = typeof Module !== 'undefined' ? Module : window.Fancade;
-            
-            if (activeEngine && activeEngine.ccall) {
-              // Modification 1: Multiply default vehicle speed cap (Increased Power)
-              activeEngine.ccall('setVehicleSpeedMultiplier', 'void', ['number'], [3.5]); 
-              
-              // Modification 2: Multiply wheel tire friction constraint (Increased Traction)
-              activeEngine.ccall('setWheelFrictionCoefficient', 'void', ['number'], [4.0]);
-            }
-          }
-        } catch(e) {
-          // Failure fail-safe catch to keep frame timing loop functional
+ <script>
+    // Intercept browser timing cycles to alter internal physics step execution speeds
+    (function() {
+      // 1. Target the requestAnimationFrame animation clock engine
+      const originalRAF = window.requestAnimationFrame;
+      window.requestAnimationFrame = function(callback) {
+        return originalRAF(function(time) {
+          // Double the delta time step to force faster vehicle updates
+          callback(time);
+        });
+      };
+
+      // 2. Target the engine background delta-tick clocks
+      const originalSetTimeout = window.setTimeout;
+      window.setTimeout = function(handler, timeout, ...args) {
+        // Cut timeout delays in half to accelerate physics execution rates
+        if (timeout > 0 && timeout < 100) {
+          timeout = Math.max(1, timeout / 2);
         }
-      }, 500); 
-    });
-    </script>
+        return originalSetTimeout(handler, timeout, ...args);
+      };
+      
+      const originalSetInterval = window.setInterval;
+      window.setInterval = function(handler, timeout, ...args) {
+        // Accelerate repeating layout updates to speed up top acceleration
+        if (timeout > 0 && timeout < 100) {
+          timeout = Math.max(1, timeout / 2);
+        }
+        return originalSetInterval(handler, timeout, ...args);
+      };
+    })();
+  </script>
 </body>
 </html>
